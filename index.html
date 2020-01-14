@@ -5,8 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Frontend QUIZ</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  
+  <header class="header">Quick Frontend Quiz</header>
+  <div class="question question--js">Jak wyśrodkować element na stornie</div>
+    <form class="answer">
+      <p class="answer__title">
+        Select your answer:
+      </p>
+      <div class="answer__avalible">
+        <input type="radio" id="choice1" name="answer" value="1">
+        <label for="choice1">Margin: auto</label>
+        <input type="radio" id="choice2" name="answer" value="2">
+        <label for="choice1">text-adjusting:center</label>
+        <input type="radio" id="choice3" name="answer" value="3">
+        <label for="choice1">div: center</label>
+      </div>
+      <div class="answer__button">
+        <button class="button button--js">Send Answer</button>
+      </div>
+    </form>
 </body>
 </html>
