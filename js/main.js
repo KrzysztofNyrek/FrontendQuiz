@@ -22,5 +22,16 @@ const question2 = {
 };
 
 //Build question section
-const question = document.querySelector('.question--js');
-question.textContent = `${question1.questionValue}`;
+let randomNumber = Math.floor(Math.random() * 1 + 1);
+const question = document.querySelector(".question--js");
+
+//Question select
+
+switch (randomNumber){
+  case 1:
+    question.textContent = question1.questionValue;
+    break;
+  case 2:
+    question.textContent = question2.questionValue;
+  break;
+};
