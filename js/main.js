@@ -17,10 +17,10 @@ let question2 = new Question('Jak wyśrodkować element na stronie?', 'margin: 0
 
 //Build question section
 let randomNumber = Math.floor(Math.random() * 1 + 1);
-const question = document.querySelector(".question--js");
-const ans1 = document.querySelector(".answer__choice1--js");
-const ans2 = document.querySelector(".answer__choice2--js");
-const ans3 = document.querySelector(".answer__choice3--js");
+let question = document.querySelector(".question--js");
+let ans1 = document.querySelector(".answer__choice1--js");
+let ans2 = document.querySelector(".answer__choice2--js");
+let ans3 = document.querySelector(".answer__choice3--js");
 
 //Question select
 switch (randomNumber){
@@ -38,10 +38,10 @@ switch (randomNumber){
   break;
 };
 //Answer service
-const answerButton = document.querySelector(".button--js");
+let answerButton = document.querySelector(".button--js");
 
 answerButton.addEventListener('click', (e) =>{
 
- const answerValue = document.querySelector('input[name="answerX"]:checked').value;
+  let answerValue = document.querySelector('input[name="answerX"]:checked').value;
 
 });
