@@ -1,25 +1,19 @@
 "use strict"
 
 //Question storage section
-const question1 = {
-  questionValue: 'Czy JS jest super?',
-  answer1: "Tak",
-  answer2: "Nie",
-  answer3: "Nie wiem",
-  correctAnswer: 1,
-  correctAnswerMessage: 'Masz rację, ottrzymujesz 1 punkt.',
-  wrongAnswerMessage: "Niestety nie. Prawidłowa odpowiedź brzmi: JS jest super"
-};
+function Question(questionValue, answer1, answer2, answer3, correctAnswer, correctAnswerMessage, wrongAnswerMessage){
+  this.questionValue = questionValue;
+  this.answer1 = answer1;
+  this.answer2 = answer2;
+  this.answer3 = answer3;
+  this.correctAnswer = correctAnswer;
+  this.correctAnswerMessage = correctAnswerMessage;
+  this.wrongAnswerMessage = wrongAnswerMessage;
+}
 
-const question2 = {
-  questionValue: 'Jak wyśrodkować element na stronie?',
-  answer1: "margin: 0 auto",
-  answer2: "text-adjusting: center",
-  answer3: "div: center",
-  correctAnswer: 2,
-  correctAnswerMessage: 'Masz rację, ottrzymujesz 1 punkt.',
-  wrongAnswerMessage: "Niestety nie. Prawidłowa odpowiedź brzmi: margin: 0 auto"
-};
+let question1 = new Question('Czy JS jest super?', 'Tak', 'Nie', 'Nie wiem', 1, 'Masz rację, otrzymujesz 1 punkt.', 'Niestety nie. Prawidłowa odpowiedź brzmi: JS jest super');
+
+let question2 = new Question('Jak wyśrodkować element na stronie?', 'margin: 0 auto', 'text-adjusting: center', 'div: center', 2, 'Masz rację, otrzymujesz 1 punkt.', 'Niestety nie. Prawidłowa odpowiedź brzmi: margin: 0 auto');
 
 //Build question section
 let randomNumber = Math.floor(Math.random() * 1 + 1);
