@@ -6,7 +6,16 @@ let totalScore = JSON.parse(sessionStorage.getItem("SesionTotalScore"));
 if(totalScore === null){
   sessionStorage.setItem("SesionTotalScore", 0);
 }
+//Used sesion storage to keep Total number of question
+let totalQuestionNumber = JSON.parse(sessionStorage.getItem("SesionTotalQuestion"));
 
+if(totalQuestionNumber === null){
+  sessionStorage.setItem("SesionTotalQuestion", 0);
+}else if(totalQuestionNumber == 10){
+  alert('Koniec testu');
+  sessionStorage.setItem("SesionTotalQuestion", 0);
+  sessionStorage.setItem("SesionTotalScore", 0);
+}
 
 //Question storage section
 function Question(questionValue, answer1, answer2, answer3, correctAnswer, correctAnswerMessage, wrongAnswerMessage){
@@ -52,7 +61,12 @@ switch (randomNumber){
 let answerButton = document.querySelector(".button--js");
 
 answerButton.addEventListener('click', (e) =>{
+  
+  //Increas number of question
+  totalQuestionNumber += 1;
+  sessionStorage.setItem('SesionTotalQuestion', totalQuestionNumber);
 
+  //Checked if answer is good and added point if so
   let answerValue = document.querySelector('input[name="answerX"]:checked').value;
   if (answerValue == correctAnswerNumber){
     totalScore += 1;
