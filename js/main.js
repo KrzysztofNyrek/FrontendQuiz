@@ -43,3 +43,11 @@ switch (randomNumber){
     ans3.textContent = question2.answer3;
   break;
 };
+//Answer service
+const answerButton = document.querySelector(".button--js");
+
+answerButton.addEventListener('click', (e) =>{
+
+ const answerValue = document.querySelector('input[name="answerX"]:checked').value;
+
+});
