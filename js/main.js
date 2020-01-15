@@ -24,14 +24,22 @@ const question2 = {
 //Build question section
 let randomNumber = Math.floor(Math.random() * 1 + 1);
 const question = document.querySelector(".question--js");
+const ans1 = document.querySelector(".answer__choice1--js");
+const ans2 = document.querySelector(".answer__choice2--js");
+const ans3 = document.querySelector(".answer__choice3--js");
 
 //Question select
-
 switch (randomNumber){
   case 1:
     question.textContent = question1.questionValue;
+    ans1.textContent = question1.answer1;
+    ans2.textContent = question1.answer2;
+    ans3.textContent = question1.answer3;
     break;
   case 2:
     question.textContent = question2.questionValue;
+    ans1.textContent = question2.answer1;
+    ans2.textContent = question2.answer2;
+    ans3.textContent = question2.answer3;
   break;
 };
