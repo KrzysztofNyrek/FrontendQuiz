@@ -26,7 +26,7 @@ if(totalQuestionNumber === null){
 }else if(totalQuestionNumber >0 && totalQuestionNumber <10){
   AnswerBox.classList.remove('answer-box--visible');
   
-    if(temporaryAnswer == 1){
+    if(temporaryAnswer === 1){
       answerBoxText.textContent = "Świetna odpowiedź";
     }else{
       answerBoxText.textContent = "Tym razem pójdzie lepiej ;)"
@@ -36,7 +36,7 @@ if(totalQuestionNumber === null){
     AnswerBox.classList.add('answer-box--visible');
   });
 
-}else if(totalQuestionNumber == 10){
+}else if(totalQuestionNumber === 10){
   finalResultBox.classList.remove('final-result--visible');
 
   if(totalScore < 5){
