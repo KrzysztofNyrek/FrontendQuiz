@@ -10,6 +10,7 @@ let finalResultBox = document.querySelector(".final-result--js");
 let partScoreDisplay = document.querySelector(".answer-box__score--js");
 let finalScoreDisplay = document.querySelector(".final__score--js");
 let moveOnButton = document.querySelector(".answer-box__button--js");
+let finalButton = document.querySelector(".final-result__button--js");
 let temporaryAnswer = JSON.parse(sessionStorage.getItem("TemporaryAnswer")); //keep value true/false to load AnswerBox or wrongAnswerBox
 let finalyComment = document.querySelector(".final-result__summary--js");
 
@@ -46,10 +47,11 @@ if(totalQuestionNumber === null){
     finalyComment.textContent = "Jesteś super FrontEnd HERO";
   }
   finalScoreDisplay.textContent = totalScore;
-  moveOnButton.addEventListener('click', (e) =>{
+  finalButton.addEventListener('click', (e) =>{
     finalResultBox.classList.add('final-result--visible');
     sessionStorage.setItem("SesionTotalQuestion", 0);
     sessionStorage.setItem("SesionTotalScore", 0);
+    window.location.reload(false);
   });
 }
 
