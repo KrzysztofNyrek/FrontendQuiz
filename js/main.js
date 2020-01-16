@@ -1,7 +1,15 @@
 "use strict"
 
-//Used sesion storage to keep Total Score value
+
+//Variables definitions
 let totalScore = JSON.parse(sessionStorage.getItem("SesionTotalScore"));
+let answerButton = document.querySelector(".button--js");
+let correctAnswerBox = document.querySelector(".correct-answer--js");
+let wrongAnswerBox = document.querySelector(".wrong-answer--js");
+let finalResultBox = document.querySelector(".final-result--js");
+let partScoreDisplay = document.querySelector(".box-score--js");
+let moveOnButton = document.querySelector(".box-button--js");
+let temporaryAnswer = JSON.parse(sessionStorage.getItem("TemporaryAnswer")); //keep value true/false to load correctAnswerBox or wrongAnswerBox
 
 if(totalScore === null){
   sessionStorage.setItem("SesionTotalScore", 0);
@@ -11,6 +19,14 @@ let totalQuestionNumber = JSON.parse(sessionStorage.getItem("SesionTotalQuestion
 
 if(totalQuestionNumber === null){
   sessionStorage.setItem("SesionTotalQuestion", 0);
+
+}else if(totalQuestionNumber >0 && totalQuestionNumber <10 && temporaryAnswer == 1){
+  correctAnswerBox.classList.remove('correct-answer--visible');
+  partScoreDisplay.textContent = totalScore;
+  moveOnButton.addEventListener('click', (e) =>{
+    correctAnswerBox.classList.add('correct-answer--visible');
+  });
+
 }else if(totalQuestionNumber == 10){
   alert('Koniec testu');
   sessionStorage.setItem("SesionTotalQuestion", 0);
@@ -58,7 +74,6 @@ switch (randomNumber){
   break;
 };
 //Answer service
-let answerButton = document.querySelector(".button--js");
 
 answerButton.addEventListener('click', (e) =>{
   
@@ -71,6 +86,6 @@ answerButton.addEventListener('click', (e) =>{
   if (answerValue == correctAnswerNumber){
     totalScore += 1;
     sessionStorage.setItem('SesionTotalScore', totalScore);
-    alert(totalScore);
+    sessionStorage.setItem('TemporaryAnswer', 1);
   }
 });
