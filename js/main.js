@@ -66,8 +66,9 @@ function Question(questionValue, answer1, answer2, answer3, correctAnswer, corre
 }
 
 let question1 = new Question('Czy JS jest super?', 'Tak', 'Nie', 'Nie wiem', 1);
-let question2 = new Question('Jak wyśrodkować element na stronie?', 'margin: 0 auto', 'text-adjusting: center', 'div: center', 2);
-
+let question2 = new Question('Jak wyśrodkować div na stronie?', 'margin: 0 auto', 'text-adjusting: center', 'div: center', 1);
+let question3 = new Question('Jaką wartość box-sizing trzeba ustawić w CSS, żeby padding nie powiększył wymiarów box\'a', 'content-box', 'border-box', 'inherit', 2);
+let question4 = new Question('Jaki znacznik HTML pozwala bez użycia CSS dopasować rozmiar obrazu do wymiaru ekranu?', 'img', 'iframe', 'picture', 3);
 //Build question section
 let question = document.querySelector(".question--js");
 let ans1 = document.querySelector(".answer__choice1--js");
@@ -76,31 +77,40 @@ let ans3 = document.querySelector(".answer__choice3--js");
 let correctAnswerNumber;
 let randomNumber;
 let questionStorage;
-let questionStorageLenght;
+let questionStorageLength;
+let questionStorageNbr = [];
 let testValue;
+let questionStr;
+let questionNumber;
 
 let questionHistory = sessionStorage.getItem("QuestionHistory");
-
 if(questionHistory === null){
-  randomNumber = Math.round(Math.random() * 1);
+  randomNumber = Math.round(Math.random() * 3);
   sessionStorage.setItem("QuestionHistory", randomNumber);
   
 }else{
   questionStorage = questionHistory.split(",");
-  testValue = 0;
-  let i;
+  let i = 0;
+  questionStorageLength = questionStorage.length;
+
+    for (i=0; i < questionStorageLength; i++){
+      questionStr = questionStorage[i];
+      questionNumber = Number(questionStr);
+      questionStorageNbr.push(questionNumber);
+    }
+
   do{
-    randomNumber = Math.round(Math.random() * 1);
-    function test(item) {
-      if (item == randomNumber) {
-        testValue += 1;
+    randomNumber = Math.round(Math.random() * 3);
+    testValue = 0;
+    for (i=0; i<questionStorageNbr.length; i++){
+      if(randomNumber === questionStorageNbr[i]){
+        testValue = -1;
       }
     }
-    questionStorage.forEach(test);
     i += 1;
-  } while (testValue>0 || i > 20);
-  questionStorage.push(randomNumber);
-  sessionStorage.setItem("QuestionHistory", questionStorage);
+  } while (testValue < 0 && i < 5);
+  questionStorageNbr.push(randomNumber);
+  sessionStorage.setItem("QuestionHistory", questionStorageNbr);
 }
 //Question select
 switch (randomNumber){
@@ -117,6 +127,20 @@ switch (randomNumber){
     ans2.textContent = question2.answer2;
     ans3.textContent = question2.answer3;
     correctAnswerNumber = question2.correctAnswer;
+  break;
+  case 2:
+    question.textContent = question3.questionValue;
+    ans1.textContent = question3.answer1;
+    ans2.textContent = question3.answer2;
+    ans3.textContent = question3.answer3;
+    correctAnswerNumber = question3.correctAnswer;
+  break;
+  case 3:
+    question.textContent = question4.questionValue;
+    ans1.textContent = question4.answer1;
+    ans2.textContent = question4.answer2;
+    ans3.textContent = question4.answer3;
+    correctAnswerNumber = question4.correctAnswer;
   break;
 };
 //Answer service
