@@ -8,8 +8,10 @@ let AnswerBox = document.querySelector(".answer-box--js");
 let answerBoxText = document.querySelector(".answer-box__text--js");
 let finalResultBox = document.querySelector(".final-result--js");
 let partScoreDisplay = document.querySelector(".answer-box__score--js");
+let finalScoreDisplay = document.querySelector(".final__score--js");
 let moveOnButton = document.querySelector(".answer-box__button--js");
 let temporaryAnswer = JSON.parse(sessionStorage.getItem("TemporaryAnswer")); //keep value true/false to load AnswerBox or wrongAnswerBox
+let finalyComment = document.querySelector(".final-result__summary--js");
 
 if(totalScore === null){
   sessionStorage.setItem("SesionTotalScore", 0);
@@ -24,7 +26,7 @@ if(totalQuestionNumber === null){
   AnswerBox.classList.remove('answer-box--visible');
   
     if(temporaryAnswer == 1){
-      answerBoxText.textContent = "Śweitna odpowiedź";
+      answerBoxText.textContent = "Świetna odpowiedź";
     }else{
       answerBoxText.textContent = "Tym razem pójdzie lepiej ;)"
     }
@@ -34,9 +36,21 @@ if(totalQuestionNumber === null){
   });
 
 }else if(totalQuestionNumber == 10){
-  alert('Koniec testu');
-  sessionStorage.setItem("SesionTotalQuestion", 0);
-  sessionStorage.setItem("SesionTotalScore", 0);
+  finalResultBox.classList.remove('final-result--visible');
+
+  if(totalScore < 5){
+    finalyComment.textContent ="Jeśli poćwiczysz jeszcze trochę, na pewno będziesz znal odpowiedź na większość pytań";
+  }else if (totalScore >= 5 && totalScore < 8){
+    finalyComment.textContent = "Już prawie wiesz wszystko :)";
+  }else{
+    finalyComment.textContent = "Jesteś super FrontEnd HERO";
+  }
+  finalScoreDisplay.textContent = totalScore;
+  moveOnButton.addEventListener('click', (e) =>{
+    finalResultBox.classList.add('final-result--visible');
+    sessionStorage.setItem("SesionTotalQuestion", 0);
+    sessionStorage.setItem("SesionTotalScore", 0);
+  });
 }
 
 //Question storage section
