@@ -17,6 +17,7 @@ let finalyComment = document.querySelector(".final-result__summary--js");
 if(totalScore === null){
   sessionStorage.setItem("SesionTotalScore", 0);
 }
+
 //Used sesion storage to keep Total number of question
 let totalQuestionNumber = JSON.parse(sessionStorage.getItem("SesionTotalQuestion"));
 
@@ -68,13 +69,39 @@ let question1 = new Question('Czy JS jest super?', 'Tak', 'Nie', 'Nie wiem', 1);
 let question2 = new Question('Jak wyśrodkować element na stronie?', 'margin: 0 auto', 'text-adjusting: center', 'div: center', 2);
 
 //Build question section
-let randomNumber = Math.round(Math.random() * 1);
 let question = document.querySelector(".question--js");
 let ans1 = document.querySelector(".answer__choice1--js");
 let ans2 = document.querySelector(".answer__choice2--js");
 let ans3 = document.querySelector(".answer__choice3--js");
 let correctAnswerNumber;
+let randomNumber;
+let questionStorage;
+let questionStorageLenght;
+let testValue;
 
+let questionHistory = sessionStorage.getItem("QuestionHistory");
+
+if(questionHistory === null){
+  randomNumber = Math.round(Math.random() * 1);
+  sessionStorage.setItem("QuestionHistory", randomNumber);
+  
+}else{
+  questionStorage = questionHistory.split(",");
+  testValue = 0;
+  let i;
+  do{
+    randomNumber = Math.round(Math.random() * 1);
+    function test(item) {
+      if (item == randomNumber) {
+        testValue += 1;
+      }
+    }
+    questionStorage.forEach(test);
+    i += 1;
+  } while (testValue>0 || i > 20);
+  questionStorage.push(randomNumber);
+  sessionStorage.setItem("QuestionHistory", questionStorage);
+}
 //Question select
 switch (randomNumber){
   case 0:
