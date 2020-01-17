@@ -1,7 +1,18 @@
 .header{
-  font-family: 'Anton', sans-serif;
+  
+  &__title{
   font-size: 3rem;
   text-align: center;
+  color: #E6EED6;
+  font-family: 'Anton', sans-serif;
+  }
+  &__text{
+    font-size: 2rem;
+    text-align: center;
+    font-family: 'Slabo 27px', serif;
+    font-style: italic;
+    color: #BBC5AA;
+  }
 }
 .answer{
   font-family: 'Slabo 27px', serif;

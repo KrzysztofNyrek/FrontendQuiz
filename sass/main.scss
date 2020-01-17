@@ -2,3 +2,7 @@
 @import "_box.scss";
 @import "_layout.scss";
 @import "_fonts.scss";
+
+body{
+  background: radial-gradient(circle, rgba(209,188,227,1) 0%, rgba(196,155,187,1) 100%);
+}
