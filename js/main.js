@@ -71,6 +71,22 @@ let question1 = new Question('Czy JS jest super?', 'Tak', 'Nie', 'Nie wiem', 1);
 let question2 = new Question('Jak wyśrodkować div na stronie?', 'margin: 0 auto', 'text-adjusting: center', 'div: center', 1);
 let question3 = new Question('Jaką wartość box-sizing trzeba ustawić w CSS, żeby padding nie powiększył wymiarów box\'a', 'content-box', 'border-box', 'inherit', 2);
 let question4 = new Question('Jaki znacznik HTML pozwala bez użycia CSS dopasować rozmiar obrazu do wymiaru ekranu?', 'img', 'iframe', 'picture', 3);
+let question5 = new Question('Czy jednostka REM odnosi się do wartości czcionki:', 'rodzica', 'root\'a', 'domyślenj wielkości czcioneki w systemie', 2);
+let question6 = new Question('Czy w Java Script można podać jako parametr funkcji inną funkcję?', 'Tak', 'Nie', 'Nie wiem', 1);
+let question7 = new Question('Czy zmienna let zadeklarowana w ciele funkcji będzie dostępna poza tą funkcją?', 'Tak', 'Nie', 'Nie wiem', 2);
+let question8 = new Question('W celu porównania danych wraz z ich typem należy użyć znaku:', '==', '$==', '===', 3);
+let question9 = new Question('Promise w Java Script pozwala na:', 'deklarowanie zmiennych w dowolnym miejscu w kodzie', 'przesyłanie danych z formularza na serwer', 'wykonanie kolejnych bloków kodu, pomimo że wcześniejszy kod jeszcze się nie wykonał', 3);
+let question10 = new Question('Parametr willchange w CSS pozwala na:', 'zmodyfikowanie elementu na stronie przez użytkownika', 'przydzielenie większych zasobów do obsługi danego elementu przez przeglądarkę', 'zmodyfikowanie danego elementu CSS przez JavaSCript', 2);
+let question11 = new Question('Co to znaczy, że kod jest asynchroniczny?', 'przeglądarka może wykonywać kilka bloków kodu jednocześnie', 'część kodu napisana jest w Java Script, a część w React', 'kod wykona się w odwrotnej kolejności', 1);
+let question12 = new Question('Ternary operator to:', 'operator nadpisujący wartość poprzednią', 'uproszczony zapis wyrazenia warunkowego if', 'operator terminowo wyłaczający wskazany blok kodu', 2);
+let question13 = new Question('Czy dane zawarte w local Storage zostaną usunięte, kiedy użytkownik wyczyści ciasteczka z przegladarki?', 'Tak', 'Nie', 'Nie wiem', 2);
+let question14 = new Question('<script> możemy wpiąc w HTML:', 'tylko w sekcji HEAD', 'tylko na końcu sekcji BODY', 'w obumiejscach', 3);
+let question15 = new Question('\'git checkout\' służy do:', 'sprawdzenia stanu repozytorium', 'sprawdzenia połączenia z serwerem', 'zmiany gałęzi kodu', 3);
+let question16 = new Question('Do czego służy CSS Spites?', 'do łączenia wielu plików css w jeden plik', 'do łączenia wielu plików graficznych w jeden plik', 'do łączenia wielu plików JS w jeden plik', 2);
+let question17 = new Question('\'Git log --oneline <TAG>\' wykona następującą akcję:', 'doda TAG do ostatniego commita będącego na serwerze', 'wyświetli log commita oznaczonego wskazanym tagiem', 'wyświetli historię od commita zaznaczonego wskazanym tagiem', 3);
+let question18 = new Question('\'gitk\' wywoła','consolę git\'a', 'narzędzie do przeglądania historii projektu', 'narzędzie do komunikacji z serwerem', 2);
+let question19 = new Question('Flex-basis pozwala okreslić:', 'maksymalny rozmiar elementu', 'położenie obiektu w kontenerze', 'domyślne ułożenie elementu względem innych elementów', 1);
+let question20 = new Question('Typ input radiobutton pozwala na:', 'wybranie dwóch elementów z listy', 'wybranie losowego elementu z listy', 'wybranie tylko jednego elementu z listy', 3);
 
 //Variables definitions
 let question = document.querySelector(".question--js");
@@ -89,7 +105,7 @@ let questionHistory = sessionStorage.getItem("QuestionHistory");
 
 //Question pick mechanism
 if(questionHistory === null){
-  randomNumber = Math.round(Math.random() * 3);
+  randomNumber = Math.round(Math.random() * 19);
   sessionStorage.setItem("QuestionHistory", randomNumber);
   
 }else{
@@ -104,7 +120,7 @@ if(questionHistory === null){
     }
   //Check if question appeared in current quiz earlier and if so change the question number
   do{
-    randomNumber = Math.round(Math.random() * 3);
+    randomNumber = Math.round(Math.random() * 19);
     testValue = 0;
     for (i=0; i<questionStorageNbr.length; i++){
       if(randomNumber === questionStorageNbr[i]){
@@ -112,7 +128,7 @@ if(questionHistory === null){
       }
     }
     i += 1;
-  } while (testValue < 0 && i < 5);
+  } while (testValue < 0 && i < 10);
   questionStorageNbr.push(randomNumber);
   sessionStorage.setItem("QuestionHistory", questionStorageNbr);
 }
@@ -145,6 +161,118 @@ switch (randomNumber){
     ans2.textContent = question4.answer2;
     ans3.textContent = question4.answer3;
     correctAnswerNumber = question4.correctAnswer;
+  break;
+  case 4:
+    question.textContent = question5.questionValue;
+    ans1.textContent = question5.answer1;
+    ans2.textContent = question5.answer2;
+    ans3.textContent = question5.answer3;
+    correctAnswerNumber = question5.correctAnswer;
+  break;
+  case 5:
+    question.textContent = question6.questionValue;
+    ans1.textContent = question6.answer1;
+    ans2.textContent = question6.answer2;
+    ans3.textContent = question6.answer3;
+    correctAnswerNumber = question6.correctAnswer;
+  break;
+  case 6:
+    question.textContent = question7.questionValue;
+    ans1.textContent = question7.answer1;
+    ans2.textContent = question7.answer2;
+    ans3.textContent = question7.answer3;
+    correctAnswerNumber = question7.correctAnswer;
+  break;
+  case 7:
+    question.textContent = question8.questionValue;
+    ans1.textContent = question8.answer1;
+    ans2.textContent = question8.answer2;
+    ans3.textContent = question8.answer3;
+    correctAnswerNumber = question8.correctAnswer;
+  break;
+  case 8:
+    question.textContent = question9.questionValue;
+    ans1.textContent = question9.answer1;
+    ans2.textContent = question9.answer2;
+    ans3.textContent = question9.answer3;
+    correctAnswerNumber = question9.correctAnswer;
+  break;
+  case 9:
+    question.textContent = question10.questionValue;
+    ans1.textContent = question10.answer1;
+    ans2.textContent = question10.answer2;
+    ans3.textContent = question10.answer3;
+    correctAnswerNumber = question10.correctAnswer;
+  break;
+  case 10:
+    question.textContent = question11.questionValue;
+    ans1.textContent = question11.answer1;
+    ans2.textContent = question11.answer2;
+    ans3.textContent = question11.answer3;
+    correctAnswerNumber = question11.correctAnswer;
+  break;
+  case 11:
+    question.textContent = question12.questionValue;
+    ans1.textContent = question12.answer1;
+    ans2.textContent = question12.answer2;
+    ans3.textContent = question12.answer3;
+    correctAnswerNumber = question12.correctAnswer;
+  break;
+  case 12:
+    question.textContent = question13.questionValue;
+    ans1.textContent = question13.answer1;
+    ans2.textContent = question13.answer2;
+    ans3.textContent = question13.answer3;
+    correctAnswerNumber = question13.correctAnswer;
+  break;
+  case 13:
+    question.textContent = question14.questionValue;
+    ans1.textContent = question14.answer1;
+    ans2.textContent = question14.answer2;
+    ans3.textContent = question14.answer3;
+    correctAnswerNumber = question14.correctAnswer;
+  break;
+  case 14:
+    question.textContent = question15.questionValue;
+    ans1.textContent = question15.answer1;
+    ans2.textContent = question15.answer2;
+    ans3.textContent = question15.answer3;
+    correctAnswerNumber = question15.correctAnswer;
+  break;
+  case 15:
+    question.textContent = question16.questionValue;
+    ans1.textContent = question16.answer1;
+    ans2.textContent = question16.answer2;
+    ans3.textContent = question16.answer3;
+    correctAnswerNumber = question16.correctAnswer;
+  break;
+  case 16:
+    question.textContent = question17.questionValue;
+    ans1.textContent = question17.answer1;
+    ans2.textContent = question17.answer2;
+    ans3.textContent = question17.answer3;
+    correctAnswerNumber = question17.correctAnswer;
+  break;
+  case 17:
+    question.textContent = question18.questionValue;
+    ans1.textContent = question18.answer1;
+    ans2.textContent = question18.answer2;
+    ans3.textContent = question18.answer3;
+    correctAnswerNumber = question18.correctAnswer;
+  break;
+  case 18:
+    question.textContent = question19.questionValue;
+    ans1.textContent = question19.answer1;
+    ans2.textContent = question19.answer2;
+    ans3.textContent = question19.answer3;
+    correctAnswerNumber = question19.correctAnswer;
+  break;
+  case 19:
+    question.textContent = question20.questionValue;
+    ans1.textContent = question20.answer1;
+    ans2.textContent = question20.answer2;
+    ans3.textContent = question20.answer3;
+    correctAnswerNumber = question20.correctAnswer;
   break;
 };
 
