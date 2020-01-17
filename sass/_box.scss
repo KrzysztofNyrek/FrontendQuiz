@@ -38,11 +38,11 @@
       box-shadow: 0px;
     }
   }
+  &--visible{
+    display:none;
+  }
 }
 
-.answer-box--visible{
-  display:none;
-}
 .final-result--visible{
   display:none;
 }
