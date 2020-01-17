@@ -6,7 +6,7 @@ let AnswerBox = document.querySelector(".answer-box--js");
 let answerBoxText = document.querySelector(".answer-box__text--js");
 let finalResultBox = document.querySelector(".final-result--js");
 let partScoreDisplay = document.querySelector(".answer-box__score--js");
-let finalScoreDisplay = document.querySelector(".final__score--js");
+let finalScoreDisplay = document.querySelector(".final-result__score--js");
 let moveOnButton = document.querySelector(".answer-box__button--js");
 let finalButton = document.querySelector(".final-result__button--js");
 
