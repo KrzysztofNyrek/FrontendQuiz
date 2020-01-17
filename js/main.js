@@ -54,8 +54,14 @@ if(totalQuestionNumber === null){
     finalResultBox.classList.add('final-result--visible');
     sessionStorage.setItem("SessionTotalQuestion", 0);
     sessionStorage.setItem("SessionTotalScore", 0);
-    window.location.reload(false);
+    sessionStorage.setItem("QuestionHistory", '');
+    totalQuestionNumber =0;
   });
+}else if (totalQuestionNumber >10){
+  sessionStorage.setItem("QuestionHistory", '');
+  sessionStorage.setItem("SessionTotalQuestion", 0);
+  sessionStorage.setItem("SessionTotalScore", 0);
+  totalQuestionNumber =0;
 }
 
 //Question storage section
