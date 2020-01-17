@@ -5,4 +5,21 @@
   box-shadow: 10px 10px 5px 0px rgba(94,90,94,1);
   border-radius: 10px;
 }
-
+.button{
+  margin: 1rem auto;
+  display: block;
+  background-color: #E6EED6;
+  font-family: 'Anton', sans-serif;
+  font-size: 1rem;
+  padding: 4px 8px;
+  border-radius: 20px;
+  transition: all .2s;
+  &:hover{
+    transform: scale(2, 1.5);
+    box-shadow: 0px 2px 2px 0px rgba(104, 102, 104, 0.603);
+  }
+  &:active{
+    transform: scale(1.5, 1.2);
+    box-shadow: 0px;
+  }
+}
