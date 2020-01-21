@@ -76,7 +76,7 @@ function Question(questionValue, answer1, answer2, answer3, correctAnswer, corre
 let question1 = new Question('Czy JS jest super?', 'Tak', 'Nie', 'Nie wiem', 1);
 let question2 = new Question('Jak wyśrodkować div na stronie?', 'margin: 0 auto', 'text-adjusting: center', 'div: center', 1);
 let question3 = new Question('Jaką wartość box-sizing trzeba ustawić w CSS, żeby padding nie powiększył wymiarów box\'a', 'content-box', 'border-box', 'inherit', 2);
-let question4 = new Question('Jaki znacznik HTML pozwala bez użycia CSS dopasować rozmiar obrazu do wymiaru ekranu?', 'img', 'iframe', 'picture', 3);
+let question4 = new Question('Jaki znacznik HTML pozwala bez użycia CSS dopasować rozmiar obrazu do wymiaru ekranu?', 'img', 'iframe', 'source srcset', 3);
 let question5 = new Question('Czy jednostka REM odnosi się do wartości czcionki:', 'rodzica', 'root\'a', 'domyślenj wielkości czcioneki w systemie', 2);
 let question6 = new Question('Czy w Java Script można podać jako parametr funkcji inną funkcję?', 'Tak', 'Nie', 'Nie wiem', 1);
 let question7 = new Question('Czy zmienna let zadeklarowana w ciele funkcji będzie dostępna poza tą funkcją?', 'Tak', 'Nie', 'Nie wiem', 2);
@@ -88,7 +88,7 @@ let question12 = new Question('Ternary operator to:', 'operator nadpisujący war
 let question13 = new Question('Czy dane zawarte w local Storage zostaną usunięte, kiedy użytkownik wyczyści ciasteczka z przegladarki?', 'Tak', 'Nie', 'Nie wiem', 2);
 let question14 = new Question('<script> możemy wpiąc w HTML:', 'tylko w sekcji HEAD', 'tylko na końcu sekcji BODY', 'w obumiejscach', 3);
 let question15 = new Question('\'git checkout\' służy do:', 'sprawdzenia stanu repozytorium', 'sprawdzenia połączenia z serwerem', 'zmiany gałęzi kodu', 3);
-let question16 = new Question('Do czego służy CSS Spites?', 'do łączenia wielu plików css w jeden plik', 'do łączenia wielu plików graficznych w jeden plik', 'do łączenia wielu plików JS w jeden plik', 2);
+let question16 = new Question('Do czego służy CSS Sprites?', 'do łączenia wielu plików css w jeden plik', 'do łączenia wielu plików graficznych w jeden plik', 'do łączenia wielu plików JS w jeden plik', 2);
 let question17 = new Question('\'Git log --oneline <TAG>\' wykona następującą akcję:', 'doda TAG do ostatniego commita będącego na serwerze', 'wyświetli log commita oznaczonego wskazanym tagiem', 'wyświetli historię od commita zaznaczonego wskazanym tagiem', 3);
 let question18 = new Question('\'gitk\' wywoła','consolę git\'a', 'narzędzie do przeglądania historii projektu', 'narzędzie do komunikacji z serwerem', 2);
 let question19 = new Question('Flex-basis pozwala okreslić:', 'maksymalny rozmiar elementu', 'położenie obiektu w kontenerze', 'domyślne ułożenie elementu względem innych elementów', 1);
