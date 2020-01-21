@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,15 +19,15 @@
   </head>
   <body>
     <div class="pagewrapper">
-      <header class="header__title">Quick Frontend Quiz</header>
+      <h1 class="header__title">Quick Frontend Quiz</h1>
       <p class="header__text">Odpowiedź na 10 pytań i sprawdź czy jesteś FrontEnd Hero ;)</p>
       <noscript><p class="header__warning">Do prawidłowego działania quizu potrzebna jest włączona obsługa Java Script</p></noscript>
-      <div class="question question--js">Pytanie 1</div>
+      <h2 class="question question--js">Pytanie 1</h2>
       <form class="answer">
       <p class="answer__title">
         Zaznacz prawidłową odpowiedź:
       </p>
-      <div class="answer__avalible answer__avalible--js">
+      <form class="answer__avalible answer__avalible--js">
         <div>
           <input type="radio" id="choice1" name="answerX" value="1">
           <label class="answer__choice1--js" for="choice1">Margin: auto</label>
@@ -40,11 +40,9 @@
           <input type="radio" id="choice3" name="answerX" value="3">
           <label class="answer__choice3--js" for="choice3">div: center</label>
         </div>
-      </div>
-      <div class="answer__button">
+      </form>
         <button class="button button--js">Send Answer</button>
       </div>
-      </form>
       <div class="answer-box answer-box--visible answer-box--js">
       <p class="answer-box__text answer-box__text--js">Świetna odpowiedź</p>
       <p class="answer-box__score">Twój obecny wynik to:</p>
