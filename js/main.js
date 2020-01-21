@@ -81,9 +81,9 @@ let question5 = new Question('Czy jednostka REM odnosi się do wartości czcionk
 let question6 = new Question('Czy w Java Script można podać jako parametr funkcji inną funkcję?', 'Tak', 'Nie', 'Nie wiem', 1);
 let question7 = new Question('Czy zmienna let zadeklarowana w ciele funkcji będzie dostępna poza tą funkcją?', 'Tak', 'Nie', 'Nie wiem', 2);
 let question8 = new Question('W celu porównania danych wraz z ich typem należy użyć znaku:', '==', '$==', '===', 3);
-let question9 = new Question('Promise w Java Script pozwala na:', 'deklarowanie zmiennych w dowolnym miejscu w kodzie', 'przesyłanie danych z formularza na serwer', 'wykonanie kolejnych bloków kodu, pomimo że wcześniejszy kod jeszcze się nie wykonał', 3);
-let question10 = new Question('Parametr willchange w CSS pozwala na:', 'zmodyfikowanie elementu na stronie przez użytkownika', 'przydzielenie większych zasobów do obsługi danego elementu przez przeglądarkę', 'zmodyfikowanie danego elementu CSS przez JavaScript', 2);
-let question11 = new Question('Co to znaczy, że kod jest asynchroniczny?', 'przeglądarka może wykonywać kilka bloków kodu jednocześnie', 'część kodu napisana jest w Java Script, a część w React', 'kod wykona się w odwrotnej kolejności', 1);
+let question9 = new Question('Promise w Java Script pozwala na:', 'deklarowanie zmiennych w dowolnym miejscu w kodzie', 'przesyłanie danych z formularza na serwer', 'pozwala sterować przepływem kodu asynchronicznego', 3);
+let question10 = new Question('Właściwość will-change w CSS pozwala na:', 'zmodyfikowanie elementu na stronie przez użytkownika', 'informuje przeglądarkę, że dany element będzie się zmieniał', 'zmodyfikowanie danego elementu CSS przez JavaScript', 2);
+let question11 = new Question('Co to znaczy, że kod jest asynchroniczny?', 'przeglądarka może wykonywać część kodu w tle', 'część kodu napisana jest w Java Script, a część w React', 'kod wykona się w odwrotnej kolejności', 1);
 let question12 = new Question('Ternary operator to:', 'operator nadpisujący wartość poprzednią', 'uproszczony zapis wyrażenia warunkowego if', 'operator terminowo wyłączający wskazany blok kodu', 2);
 let question13 = new Question('Czy dane zawarte w local Storage zostaną usunięte, kiedy użytkownik wyczyści ciasteczka z przeglądarki?', 'Tak', 'Nie', 'Nie wiem', 2);
 let question14 = new Question('<script> możemy wpiąc w HTML:', 'tylko w sekcji HEAD', 'tylko na końcu sekcji BODY', 'w obu miejscach', 3);
