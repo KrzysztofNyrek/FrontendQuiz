@@ -1,21 +1,35 @@
 "use strict"
 //IU Controller
+var IUController = (function(){
 
+  //DOM variable storage
+  var DOMstrings ={
+    answerButton = '.button--js',
+    AnswerBox = '.answer-box--js',
+    answerBoxText = '.answer-box__text--js',
+    finalResultBox = '.final-result--js',
+    partScoreDisplay = '.answer-box__score--js',
+    finalScoreDisplay = '.final-result__score--js',
+    moveOnButton = '.answer-box__button--js',
+    finalButton = '.final-result__button--js',
+    finalyComment = '.final-result__summary--js'
+  };
+
+});
 //Counting Controller
 
 //App Contorler
+var controller = (function(UICtrl, CountCtrl){
 
-//Variables definitions
-let answerButton = document.querySelector(".button--js");
-let AnswerBox = document.querySelector(".answer-box--js");
-let answerBoxText = document.querySelector(".answer-box__text--js");
-let finalResultBox = document.querySelector(".final-result--js");
-let partScoreDisplay = document.querySelector(".answer-box__score--js");
-let finalScoreDisplay = document.querySelector(".final-result__score--js");
-let moveOnButton = document.querySelector(".answer-box__button--js");
-let finalButton = document.querySelector(".final-result__button--js");
+  return {
+    init: function(){
+    console.log('App start')
+    }
+  };
+})(IUController, AppControler);
 
-let finalyComment = document.querySelector(".final-result__summary--js");
+//Starting app
+controller.init();
 
 //Used session storage to avoid losing data when browser refreshing page
 let totalScore = JSON.parse(sessionStorage.getItem("SessionTotalScore"));
