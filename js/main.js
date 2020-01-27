@@ -4,6 +4,7 @@
 var UIController = (function(){
 
   var DOMstrings ={
+    pagewrapper: '.pagewrapper--js',
     answerButton: '.button--js',
     AnswerBox: '.answer-box--js',
     answerBoxText: '.answer-box__text--js',
@@ -42,12 +43,14 @@ var controller = (function(UICtrl){
 
   };
   var displayQuestion = function()  {
+    var element, html;
     //1. Delete first page img and button
-    var element = document.querySelector(DOM.displaySection);
+    element = document.querySelector(DOM.displaySection);
     element.parentNode.removeChild(element);
     //2. Add Question, aswers and send button
-
-
+    html = '<section class="display-area--js"><h2 class="question question--js">Pytanie 1</h2><div class="answer"><p class="answer__title">        Zaznacz prawidłową odpowiedź:</p></div></section>';
+    // Insert the HTML into the DOM
+    document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
   };
   //function allow us to start aplication
   return {
