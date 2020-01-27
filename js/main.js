@@ -13,7 +13,8 @@ var UIController = (function(){
     moveOnButton: '.answer-box__button--js',
     startButton: '.header__button--js',
     finalButton: '.final-result__button--js',
-    finalyComment: '.final-result__summary--js'
+    finalyComment: '.final-result__summary--js',
+    displaySection: '.display-area--js'
   };
   
   //Set below value public, that other parts of code have access to this value.
@@ -27,19 +28,27 @@ var UIController = (function(){
 // GLOBAL APP CONTROLLER
 var controller = (function(UICtrl){
 
-  var setupEventListeners = function(){
-    var DOM = UICtrl.getDOMstrings();
+  var DOM = UICtrl.getDOMstrings();
 
-    document.querySelector(DOM.startButton).addEventListener('click', console.log('Hej'));
+  var setupEventListeners = function(){
+
+    document.querySelector(DOM.startButton).addEventListener('click', displayQuestion);
 
     document.addEventListener('keypress', function(event){ 
       if (event.keyCode === 13 || event.which === 13){
-        console.log('Hej');
+        displayQuestion();
       }
     });
 
   };
-    
+  var displayQuestion = function()  {
+    //1. Delete first page img and button
+    var element = document.querySelector(DOM.displaySection);
+    element.parentNode.removeChild(element);
+    //2. Add Question, aswers and send button
+
+
+  };
   //function allow us to start aplication
   return {
     init: function(){
