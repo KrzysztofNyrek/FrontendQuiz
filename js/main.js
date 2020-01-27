@@ -4,15 +4,15 @@ var IUController = (function(){
 
   //DOM variable storage
   var DOMstrings ={
-    answerButton = '.button--js',
-    AnswerBox = '.answer-box--js',
-    answerBoxText = '.answer-box__text--js',
-    finalResultBox = '.final-result--js',
-    partScoreDisplay = '.answer-box__score--js',
-    finalScoreDisplay = '.final-result__score--js',
-    moveOnButton = '.answer-box__button--js',
-    finalButton = '.final-result__button--js',
-    finalyComment = '.final-result__summary--js'
+    answerButton: '.button--js',
+    AnswerBox: '.answer-box--js',
+    answerBoxText: '.answer-box__text--js',
+    finalResultBox: '.final-result--js',
+    partScoreDisplay: '.answer-box__score--js',
+    finalScoreDisplay: '.final-result__score--js',
+    moveOnButton: '.answer-box__button--js',
+    finalButton: '.final-result__button--js',
+    finalyComment: '.final-result__summary--js'
   };
 
 });
