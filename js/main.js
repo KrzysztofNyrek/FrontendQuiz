@@ -1,8 +1,8 @@
 "use strict"
-//IU Controller
-var IUController = (function(){
 
-  //DOM variable storage
+//UI CONTROLLER
+var UIController = (function(){
+
   var DOMstrings ={
     answerButton: '.button--js',
     AnswerBox: '.answer-box--js',
@@ -11,10 +11,49 @@ var IUController = (function(){
     partScoreDisplay: '.answer-box__score--js',
     finalScoreDisplay: '.final-result__score--js',
     moveOnButton: '.answer-box__button--js',
+    startButton: '.header__button--js',
     finalButton: '.final-result__button--js',
     finalyComment: '.final-result__summary--js'
   };
-  //Question storage section
+  
+  //Set below value public, that other parts of code have access to this value.
+  return {
+    getDOMstrings: function(){
+      return DOMstrings;
+    }
+  }
+})();
+
+// GLOBAL APP CONTROLLER
+var controller = (function(UICtrl){
+
+  var setupEventListeners = function(){
+    var DOM = UICtrl.getDOMstrings();
+
+    document.querySelector(DOM.startButton).addEventListener('click', console.log('Hej'));
+
+    document.addEventListener('keypress', function(event){ 
+      if (event.keyCode === 13 || event.which === 13){
+        console.log('Hej');
+      }
+    });
+
+  };
+    
+  //function allow us to start aplication
+  return {
+    init: function(){
+      setupEventListeners();
+    },
+  }
+
+})(UIController);
+
+//This line of code start aplication after page load
+controller.init();
+
+/*
+//Question storage section
   function Question(questionValue, answer1, answer2, answer3, correctAnswer){
     this.questionValue = questionValue;
     this.answer1 = answer1;
@@ -44,33 +83,6 @@ var IUController = (function(){
   let question19 = new Question('Flex-basis pozwala określić:', 'maksymalny rozmiar elementu', 'położenie obiektu w kontenerze', 'domyślne ułożenie elementu względem innych elementów', 1);
   let question20 = new Question('Typ input radiobutton pozwala na:', 'wybranie dwóch elementów z listy', 'wybranie losowego elementu z listy', 'wybranie tylko jednego elementu z listy', 3);
 
-  return {
-    getDOMstring: function(){
-      return DOMstrings;
-    }
-  }
-
-});
-//Counting Controller
-var AppControler = (function(){
-
-});
-//App Contorler
-var controller = (function(UICtrl, CountCtrl){
-
-  var DOM = UICtrl.getDOMstring();
-  
-  return {
-    init: function(){
-    console.log('App start');
-    }
-  };
-})(IUController, AppControler);
-
-//Starting app
-controller.init();
-
-/*
 //Used session storage to avoid losing data when browser refreshing page
 let totalScore = JSON.parse(sessionStorage.getItem("SessionTotalScore"));
 let temporaryAnswer = JSON.parse(sessionStorage.getItem("TemporaryAnswer")); //keep value true/false to load AnswerBox or wrongAnswerBox
