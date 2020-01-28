@@ -62,16 +62,24 @@ var controller = (function(UICtrl){
   };
 
   var displayQuestion = function()  {
-    var element, html;
-    //1. Delete first page img and button
-    element = document.querySelector(DOM.displaySection);
-    element.parentNode.removeChild(element);
-    // 2. Select random number
+    var element, html, questionsLenght;
 
-    //3. Add Question, aswers and send button
-    html = '<section class="display-area--js"><h2 class="question question--js">Pytanie 1</h2><div class="answer"><p class="answer__title">Zaznacz prawidłową odpowiedź:</p></div></section>';
-    // Insert the HTML into the DOM
-    document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
+    if (answer1.checked || answer2.checked || answer3.checked){
+      
+      //1. Delete first page img and button
+      element = document.querySelector(DOM.displaySection);
+      element.parentNode.removeChild(element);
+      // 2. Select random number
+      questionsLenght = Object.keys(questions).length;
+      
+      //3. Add Question, aswers and send button
+      html = '<section class="display-area--js"><h2 class="question question--js">Pytanie 1</h2><div class="answer"><p class="answer__title">Zaznacz prawidłową odpowiedź:</p></div></section>';
+      // Insert the HTML into the DOM
+      document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
+    }else {
+      window.alert('Zaznacz odpowiedź, żeby przejść dalej.');
+    }
+    
   };
   //function allow us to start aplication
   return {
