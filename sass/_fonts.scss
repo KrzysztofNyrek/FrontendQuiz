@@ -11,14 +11,18 @@
   font-family: 'Slabo 27px', serif;
   &__title{
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 1.5rem;
+    text-decoration: underline;
     text-align: center;
-    color: #BBC5AA;
+    color: #00FFFF;
   }
   &__avalible{
     font-size: 1.5rem;
     text-align: center;
     font-family: inherit;
     color: #E6EED6;
+    &--gold{
+      color: #FFD700;
+    }
   }
 }
