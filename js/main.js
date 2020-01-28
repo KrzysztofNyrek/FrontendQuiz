@@ -15,7 +15,7 @@ var UIController = (function(){
     startButton: '.header__button--js',
     finalButton: '.final-result__button--js',
     finalyComment: '.final-result__summary--js',
-    displaySection: '.display-area--js'
+    displaySection: '.display-area--js',
   };
   
   //Set below value public, that other parts of code have access to this value.
@@ -30,18 +30,36 @@ var UIController = (function(){
 var controller = (function(UICtrl){
 
   var DOM = UICtrl.getDOMstrings();
-
+  var answer1 = document.getElementById('choice1');
+  var answer2 = document.getElementById('choice2');
+  var answer3 = document.getElementById('choice3');
   var setupEventListeners = function(){
 
+    /* comment out because changed html structure for a moment !RESTORE THIS PART IN PRODUCTION
     document.querySelector(DOM.startButton).addEventListener('click', displayQuestion);
-
     document.addEventListener('keypress', function(event){ 
       if (event.keyCode === 13 || event.which === 13){
         displayQuestion();
       }
     });
+    */
+    answer1.addEventListener('click', checkValue);
+    answer2.addEventListener('click', checkValue);
+    answer3.addEventListener('click', checkValue);
 
   };
+
+  var checkValue = function (event) {
+
+    for (var i = 1;i <= 3; i++)
+      {
+        let element = 'choice' + i;
+        document.getElementById(element).checked = false;
+      }
+    document.getElementById(event.target.id).checked = true;
+    
+  };
+
   var displayQuestion = function()  {
     var element, html;
     //1. Delete first page img and button
