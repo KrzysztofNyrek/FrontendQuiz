@@ -28,11 +28,14 @@ var UIController = (function(){
 
 // GLOBAL APP CONTROLLER
 var controller = (function(UICtrl){
+  //Question number storage
 
+  //JS pointer definition
   var DOM = UICtrl.getDOMstrings();
   var answer1 = document.getElementById('choice1');
   var answer2 = document.getElementById('choice2');
   var answer3 = document.getElementById('choice3');
+
   var setupEventListeners = function(){
 
     /* comment out because changed html structure for a moment !RESTORE THIS PART IN PRODUCTION
@@ -46,18 +49,16 @@ var controller = (function(UICtrl){
     answer1.addEventListener('click', checkValue);
     answer2.addEventListener('click', checkValue);
     answer3.addEventListener('click', checkValue);
-
+    document.querySelector(DOM.answerButton).addEventListener('click', displayQuestion);
   };
-
+  //Allow user checked only one answer
   var checkValue = function (event) {
-
     for (var i = 1;i <= 3; i++)
       {
         let element = 'choice' + i;
         document.getElementById(element).checked = false;
       }
     document.getElementById(event.target.id).checked = true;
-    
   };
 
   var displayQuestion = function()  {
@@ -65,8 +66,10 @@ var controller = (function(UICtrl){
     //1. Delete first page img and button
     element = document.querySelector(DOM.displaySection);
     element.parentNode.removeChild(element);
-    //2. Add Question, aswers and send button
-    html = '<section class="display-area--js"><h2 class="question question--js">Pytanie 1</h2><div class="answer"><p class="answer__title">        Zaznacz prawidłową odpowiedź:</p></div></section>';
+    // 2. Select random number
+
+    //3. Add Question, aswers and send button
+    html = '<section class="display-area--js"><h2 class="question question--js">Pytanie 1</h2><div class="answer"><p class="answer__title">Zaznacz prawidłową odpowiedź:</p></div></section>';
     // Insert the HTML into the DOM
     document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
   };
@@ -80,34 +83,148 @@ var controller = (function(UICtrl){
 })(UIController);
 
 //Question storage section
-function Question(questionValue, answer1, answer2, answer3, correctAnswer){
-  this.questionValue = questionValue;
-  this.answer1 = answer1;
-  this.answer2 = answer2;
-  this.answer3 = answer3;
-  this.correctAnswer = correctAnswer;
+var questions ={
+  question1: {
+    questionValue: 'Czy JS jest super?',
+    answer1: 'Tak',
+    answer2: 'Nie',
+    answer3: 'Nie wiem',
+    correctAnswer: 1,
+  },
+  question2: {
+    questionValue: 'Jak wyśrodkować div na stronie?',
+    answer1: 'margin: 0 auto',
+    answer2: 'text-adjusting: center',
+    answer3: 'iv: center',
+    correctAnswer: 1,
+  },
+  question3: {
+    questionValue: 'Jaką wartość box-sizing trzeba ustawić w CSS, żeby padding nie powiększył wymiarów box\'a',
+    answer1: 'content-box',
+    answer2: 'border-box',
+    answer3: 'inherit',
+    correctAnswer: 2,
+  },
+  question4: {
+    questionValue: 'Jaki znacznik HTML pozwala bez użycia CSS dopasować rozmiar obrazu do wymiaru ekranu?',
+    answer1: 'img',
+    answer2: 'iframe',
+    answer3: 'source srcset',
+    correctAnswer: 3,
+  },
+  question5: {
+    questionValue: 'Czy jednostka REM odnosi się do wartości czcionki:',
+    answer1: 'rodzica',
+    answer2: 'root\'a',
+    answer3: 'domyślnej wielkości czcionki w systemie',
+    correctAnswer: 2,
+  },
+  question6: {
+    questionValue: 'Czy w Java Script można podać jako parametr funkcji inną funkcję?',
+    answer1: 'Tak',
+    answer2: 'Nie',
+    answer3: 'Nie wiem',
+    correctAnswer: 1,
+  },
+  question7: {
+    questionValue: 'Czy zmienna let zadeklarowana w ciele funkcji będzie dostępna poza tą funkcją?',
+    answer1: 'Tak',
+    answer2: 'Nie',
+    answer3: 'Nie wiem',
+    correctAnswer: 2,
+  },
+  question8: {
+    questionValue: 'W celu porównania danych wraz z ich typem należy użyć znaku:',
+    answer1: '==',
+    answer2: '$==',
+    answer3: '===',
+    correctAnswer: 3,
+  },
+  question9: {
+    questionValue: 'Promise w Java Script pozwala na:', 
+    answer1: 'deklarowanie zmiennych w dowolnym miejscu w kodzie',
+    answer2: 'przesyłanie danych z formularza na serwer',
+    answer3: 'sterowanie przepływem kodu asynchronicznego',
+    correctAnswer: 3,
+  },
+  question10: {
+    questionValue: 'Właściwość will-change w CSS pozwala na:', 
+    answer1: 'zmodyfikowanie elementu na stronie przez użytkownika',
+    answer2: 'informuje przeglądarkę, że dany element będzie się zmieniał',
+    answer3: 'zmodyfikowanie danego elementu CSS przez JavaScript',
+    correctAnswer: 2,
+  },
+  question11: {
+    questionValue: 'Co to znaczy, że kod jest asynchroniczny?', 
+    answer1: 'przeglądarka może wykonywać część kodu w tle', 
+    answer2: 'część kodu napisana jest w Java Script, a część w React',
+    answer3: 'kod wykona się w odwrotnej kolejności',
+    correctAnswer: 1,
+  },
+  question12: {
+    questionValue: 'Ternary operator to:', 
+    answer1: 'operator nadpisujący wartość poprzednią', 
+    answer2: 'uproszczony zapis wyrażenia warunkowego if',
+    answer3: 'operator terminowo wyłączający wskazany blok kodu',
+    correctAnswer: 2,
+  },
+  question13: {
+    questionValue: 'Czy dane zawarte w local Storage zostaną usunięte, kiedy użytkownik wyczyści ciasteczka z przeglądarki?', 
+    answer1: 'Tak', 
+    answer2: 'Nie',
+    answer3: 'Nie wiem',
+    correctAnswer: 2,
+  },
+  question14: {
+    questionValue: '<script> możemy wpiąc w HTML:', 
+    answer1: 'tylko w sekcji HEAD', 
+    answer2: 'tylko na końcu sekcji BODY',
+    answer3: 'w obu miejscach',
+    correctAnswer: 3,
+  },
+  question15: {
+    questionValue: '\'git checkout\' służy do:', 
+    answer1: 'sprawdzenia stanu repozytorium', 
+    answer2: 'sprawdzenia połączenia z serwerem',
+    answer3: 'zmiany gałęzi kodu',
+    correctAnswer: 3,
+  },
+  question16: {
+    questionValue: 'Do czego służy CSS Sprites?', 
+    answer1: 'do łączenia wielu plików css w jeden plik', 
+    answer2: 'do łączenia wielu plików graficznych w jeden plik',
+    answer3: 'do łączenia wielu plików JS w jeden plik',
+    correctAnswer: 2,
+  },
+  question17: {
+    questionValue: '\'Git log --oneline <TAG>\' wykona następującą akcję:',
+    answer1: 'doda TAG do ostatniego commita będącego na serwerze', 
+    answer2: 'wyświetli log commita oznaczonego wskazanym tagiem',
+    answer3: 'wyświetli historię od commita zaznaczonego wskazanym tagiem',
+    correctAnswer: 3,
+  },
+  question18: {
+    questionValue: 'Polecenie \'gitk\' wywoła:',
+    answer1: 'narzędzie do przeglądania historii projektu',
+    answer2: 'consolę git\'a',
+    answer3: 'narzędzie do komunikacji z serwerem',
+    correctAnswer: 1,
+  },
+  question19: {
+    questionValue: 'Flex-basis pozwala określić:',
+    answer1: 'maksymalny rozmiar elementu',
+    answer2: 'położenie obiektu w kontenerze',
+    answer3: 'domyślne ułożenie elementu względem innych elementów',
+    correctAnswer: 1,
+  },
+  question20: {
+    questionValue: 'Typ input radiobutton pozwala na:',
+    answer1: 'wybranie dwóch elementów z listy',
+    answer2: 'wybranie losowego elementu z listy',
+    answer3: 'wybranie tylko jednego elementu z listy',
+    correctAnswer: 3,
+  },
 };
-//Question value
-let question1 = new Question('Czy JS jest super?', 'Tak', 'Nie', 'Nie wiem', 1);
-let question2 = new Question('Jak wyśrodkować div na stronie?', 'margin: 0 auto', 'text-adjusting: center', 'div: center', 1);
-let question3 = new Question('Jaką wartość box-sizing trzeba ustawić w CSS, żeby padding nie powiększył wymiarów box\'a', 'content-box', 'border-box', 'inherit', 2);
-let question4 = new Question('Jaki znacznik HTML pozwala bez użycia CSS dopasować rozmiar obrazu do wymiaru ekranu?', 'img', 'iframe', 'source srcset', 3);
-let question5 = new Question('Czy jednostka REM odnosi się do wartości czcionki:', 'rodzica', 'root\'a', 'domyślnej wielkości czcionki w systemie', 2);
-let question6 = new Question('Czy w Java Script można podać jako parametr funkcji inną funkcję?', 'Tak', 'Nie', 'Nie wiem', 1);
-let question7 = new Question('Czy zmienna let zadeklarowana w ciele funkcji będzie dostępna poza tą funkcją?', 'Tak', 'Nie', 'Nie wiem', 2);
-let question8 = new Question('W celu porównania danych wraz z ich typem należy użyć znaku:', '==', '$==', '===', 3);
-let question9 = new Question('Promise w Java Script pozwala na:', 'deklarowanie zmiennych w dowolnym miejscu w kodzie', 'przesyłanie danych z formularza na serwer', 'pozwala sterować przepływem kodu asynchronicznego', 3);
-let question10 = new Question('Właściwość will-change w CSS pozwala na:', 'zmodyfikowanie elementu na stronie przez użytkownika', 'informuje przeglądarkę, że dany element będzie się zmieniał', 'zmodyfikowanie danego elementu CSS przez JavaScript', 2);
-let question11 = new Question('Co to znaczy, że kod jest asynchroniczny?', 'przeglądarka może wykonywać część kodu w tle', 'część kodu napisana jest w Java Script, a część w React', 'kod wykona się w odwrotnej kolejności', 1);
-let question12 = new Question('Ternary operator to:', 'operator nadpisujący wartość poprzednią', 'uproszczony zapis wyrażenia warunkowego if', 'operator terminowo wyłączający wskazany blok kodu', 2);
-let question13 = new Question('Czy dane zawarte w local Storage zostaną usunięte, kiedy użytkownik wyczyści ciasteczka z przeglądarki?', 'Tak', 'Nie', 'Nie wiem', 2);
-let question14 = new Question('<script> możemy wpiąc w HTML:', 'tylko w sekcji HEAD', 'tylko na końcu sekcji BODY', 'w obu miejscach', 3);
-let question15 = new Question('\'git checkout\' służy do:', 'sprawdzenia stanu repozytorium', 'sprawdzenia połączenia z serwerem', 'zmiany gałęzi kodu', 3);
-let question16 = new Question('Do czego służy CSS Sprites?', 'do łączenia wielu plików css w jeden plik', 'do łączenia wielu plików graficznych w jeden plik', 'do łączenia wielu plików JS w jeden plik', 2);
-let question17 = new Question('\'Git log --oneline <TAG>\' wykona następującą akcję:', 'doda TAG do ostatniego commita będącego na serwerze', 'wyświetli log commita oznaczonego wskazanym tagiem', 'wyświetli historię od commita zaznaczonego wskazanym tagiem', 3);
-let question18 = new Question('\'gitk\' wywoła','consolę git\'a', 'narzędzie do przeglądania historii projektu', 'narzędzie do komunikacji z serwerem', 2);
-let question19 = new Question('Flex-basis pozwala określić:', 'maksymalny rozmiar elementu', 'położenie obiektu w kontenerze', 'domyślne ułożenie elementu względem innych elementów', 1);
-let question20 = new Question('Typ input radiobutton pozwala na:', 'wybranie dwóch elementów z listy', 'wybranie losowego elementu z listy', 'wybranie tylko jednego elementu z listy', 3);
 
 //This line of code start aplication after page load
 controller.init();
