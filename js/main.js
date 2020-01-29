@@ -173,26 +173,24 @@ var UIController = (function(){
 })();
 
 // COUNT CONTROLLER
-var countController = (function(UICtrl){
-  var questionNumber;
+var countController = (function(){
   
-  var randomNumber = function(){
-
-    var questionsLenght, questions;
-    questions = UICtrl.getQuestions();
-    questionsLenght = Object.keys(questions).length;
-    questionNumber = Math.round(Math.random() * questionsLenght);
-    return{
-      questionNumber
-    }
-  };
+  
   return{
-    number: function(){
-      randomNumber();
-      console.log(questionNumber);
+
+    number: function(questionsStorage){
+
+      var questionsLenght, questions, questionNumber;
+
+      questions = questionsStorage;
+      questionsLenght = Object.keys(questions).length;
+      questionNumber = Math.round(Math.random() * questionsLenght);
+      return{
+        questionNumber
+      };
     }
   }
-})(UIController);
+})();
 
 // GLOBAL APP CONTROLLER
 var controller = (function(UICtrl, count){
@@ -230,7 +228,7 @@ var controller = (function(UICtrl, count){
   };
 
   var displayQuestion = function()  {
-    var element, html, questions;
+    var element, html, questions, questNumber;
 
     if (answer1.checked || answer2.checked || answer3.checked){
       
@@ -238,8 +236,9 @@ var controller = (function(UICtrl, count){
       element = document.querySelector(DOM.displaySection);
       element.parentNode.removeChild(element);
       // 2. Select random number
-      count.number();
-      
+      questions = UICtrl.getQuestions();
+      questNumber = count.number(questions);
+
       //3. Add Question, aswers and send button
       html = '<section class="display-area--js"><h2 class="question question--js">Pytanie 1</h2><div class="answer"><p class="answer__title">Zaznacz prawidłową odpowiedź:</p></div></section>';
       // Insert the HTML into the DOM
