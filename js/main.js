@@ -3,6 +3,7 @@
 //UI CONTROLLER
 var UIController = (function(){
 
+  //DOM elements storage section
   var DOMstrings ={
     pagewrapper: '.pagewrapper--js',
     answerButton: '.button--js',
@@ -17,81 +18,8 @@ var UIController = (function(){
     finalyComment: '.final-result__summary--js',
     displaySection: '.display-area--js',
   };
-  
-  //Set below value public, that other parts of code have access to this value.
-  return {
-    getDOMstrings: function(){
-      return DOMstrings;
-    }
-  }
-})();
-
-// GLOBAL APP CONTROLLER
-var controller = (function(UICtrl){
-  //Question number storage
-
-  //JS pointer definition
-  var DOM = UICtrl.getDOMstrings();
-  var answer1 = document.getElementById('choice1');
-  var answer2 = document.getElementById('choice2');
-  var answer3 = document.getElementById('choice3');
-
-  var setupEventListeners = function(){
-
-    /* comment out because changed html structure for a moment !RESTORE THIS PART IN PRODUCTION
-    document.querySelector(DOM.startButton).addEventListener('click', displayQuestion);
-    document.addEventListener('keypress', function(event){ 
-      if (event.keyCode === 13 || event.which === 13){
-        displayQuestion();
-      }
-    });
-    */
-    answer1.addEventListener('click', checkValue);
-    answer2.addEventListener('click', checkValue);
-    answer3.addEventListener('click', checkValue);
-    document.querySelector(DOM.answerButton).addEventListener('click', displayQuestion);
-  };
-  //Allow user checked only one answer
-  var checkValue = function (event) {
-    for (var i = 1;i <= 3; i++)
-      {
-        let element = 'choice' + i;
-        document.getElementById(element).checked = false;
-      }
-    document.getElementById(event.target.id).checked = true;
-  };
-
-  var displayQuestion = function()  {
-    var element, html, questionsLenght;
-
-    if (answer1.checked || answer2.checked || answer3.checked){
-      
-      //1. Delete first page img and button
-      element = document.querySelector(DOM.displaySection);
-      element.parentNode.removeChild(element);
-      // 2. Select random number
-      questionsLenght = Object.keys(questions).length;
-      
-      //3. Add Question, aswers and send button
-      html = '<section class="display-area--js"><h2 class="question question--js">Pytanie 1</h2><div class="answer"><p class="answer__title">Zaznacz prawidłową odpowiedź:</p></div></section>';
-      // Insert the HTML into the DOM
-      document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
-    }else {
-      window.alert('Zaznacz odpowiedź, żeby przejść dalej.');
-    }
-    
-  };
-  //function allow us to start aplication
-  return {
-    init: function(){
-      setupEventListeners();
-    },
-  }
-
-})(UIController);
-
-//Question storage section
-var questions ={
+  //Question storage section
+  var questions ={
   question1: {
     questionValue: 'Czy JS jest super?',
     answer1: 'Tak',
@@ -232,7 +160,84 @@ var questions ={
     answer3: 'wybranie tylko jednego elementu z listy',
     correctAnswer: 3,
   },
-};
+  };
+  //Set below value public, that other parts of code have access to this value.
+  return {
+    getDOMstrings: function(){
+      return DOMstrings;
+    },
+    getQuestions: function(){
+      return questions;
+    }
+  }
+})();
+
+// GLOBAL APP CONTROLLER
+var controller = (function(UICtrl){
+  //Question number storage
+
+  //JS pointer definition
+  var DOM = UICtrl.getDOMstrings();
+  var answer1 = document.getElementById('choice1');
+  var answer2 = document.getElementById('choice2');
+  var answer3 = document.getElementById('choice3');
+
+  var setupEventListeners = function(){
+
+    /* comment out because changed html structure for a moment !RESTORE THIS PART IN PRODUCTION
+    document.querySelector(DOM.startButton).addEventListener('click', displayQuestion);
+    document.addEventListener('keypress', function(event){ 
+      if (event.keyCode === 13 || event.which === 13){
+        displayQuestion();
+      }
+    });
+    */
+    answer1.addEventListener('click', checkValue);
+    answer2.addEventListener('click', checkValue);
+    answer3.addEventListener('click', checkValue);
+    document.querySelector(DOM.answerButton).addEventListener('click', displayQuestion);
+  };
+  //Allow user checked only one answer
+  var checkValue = function (event) {
+    for (var i = 1;i <= 3; i++)
+      {
+        let element = 'choice' + i;
+        document.getElementById(element).checked = false;
+      }
+    document.getElementById(event.target.id).checked = true;
+  };
+
+  var displayQuestion = function()  {
+    var element, html, questionsLenght, questions;
+
+    questions = UICtrl.getQuestions();
+
+    if (answer1.checked || answer2.checked || answer3.checked){
+      
+      //1. Delete first page img and button
+      element = document.querySelector(DOM.displaySection);
+      element.parentNode.removeChild(element);
+      // 2. Select random number
+      questionsLenght = Object.keys(questions).length;
+      
+      //3. Add Question, aswers and send button
+      html = '<section class="display-area--js"><h2 class="question question--js">Pytanie 1</h2><div class="answer"><p class="answer__title">Zaznacz prawidłową odpowiedź:</p></div></section>';
+      // Insert the HTML into the DOM
+      document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
+    }else {
+      window.alert('Zaznacz odpowiedź, żeby przejść dalej.');
+    }
+    
+  };
+  //function allow us to start aplication
+  return {
+    init: function(){
+      setupEventListeners();
+    },
+  }
+
+})(UIController);
+
 
 //This line of code start aplication after page load
 controller.init();
