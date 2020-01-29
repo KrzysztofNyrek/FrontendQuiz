@@ -172,8 +172,30 @@ var UIController = (function(){
   }
 })();
 
+// COUNT CONTROLLER
+var countController = (function(UICtrl){
+  var questionNumber;
+  
+  var randomNumber = function(){
+
+    var questionsLenght, questions;
+    questions = UICtrl.getQuestions();
+    questionsLenght = Object.keys(questions).length;
+    questionNumber = Math.round(Math.random() * questionsLenght);
+    return{
+      questionNumber
+    }
+  };
+  return{
+    number: function(){
+      randomNumber();
+      console.log(questionNumber);
+    }
+  }
+})(UIController);
+
 // GLOBAL APP CONTROLLER
-var controller = (function(UICtrl){
+var controller = (function(UICtrl, count){
   //Question number storage
 
   //JS pointer definition
@@ -208,9 +230,7 @@ var controller = (function(UICtrl){
   };
 
   var displayQuestion = function()  {
-    var element, html, questionsLenght, questions;
-
-    questions = UICtrl.getQuestions();
+    var element, html, questions;
 
     if (answer1.checked || answer2.checked || answer3.checked){
       
@@ -218,7 +238,7 @@ var controller = (function(UICtrl){
       element = document.querySelector(DOM.displaySection);
       element.parentNode.removeChild(element);
       // 2. Select random number
-      questionsLenght = Object.keys(questions).length;
+      count.number();
       
       //3. Add Question, aswers and send button
       html = '<section class="display-area--js"><h2 class="question question--js">Pytanie 1</h2><div class="answer"><p class="answer__title">Zaznacz prawidłową odpowiedź:</p></div></section>';
@@ -236,7 +256,7 @@ var controller = (function(UICtrl){
     },
   }
 
-})(UIController);
+})(UIController, countController);
 
 
 //This line of code start aplication after page load
