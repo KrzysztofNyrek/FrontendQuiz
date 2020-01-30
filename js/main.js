@@ -184,6 +184,17 @@ var UIController = (function(){
       newHtml = newHtml.replace('%answer3%', quest.answer3);
       
       return newHtml;
+    },
+    setupQuestionEventListener: function(checkValue, displayQuestion){
+      document.getElementById(DOMstrings.answer1).addEventListener('click', checkValue);
+      document.getElementById(DOMstrings.answer2).addEventListener('click', checkValue);
+      document.getElementById(DOMstrings.answer3).addEventListener('click', checkValue);
+      document.querySelector(DOMstrings.answerButton).addEventListener('click', displayQuestion);
+      document.addEventListener('keypress', function(event){ 
+        if (event.keyCode === 13 || event.which === 13){
+          displayQuestion();
+        };
+      });
     }
   }
 })();
@@ -237,32 +248,26 @@ var controller = (function(UICtrl, count){
       html = UICtrl.htmlBuilding(questNumber);
     // Insert the HTML into the DOM
       document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
-    // Set Event Listeners
-      document.getElementById(DOM.answer1).addEventListener('click', checkValue);
-      document.getElementById(DOM.answer2).addEventListener('click', checkValue);
-      document.getElementById(DOM.answer3).addEventListener('click', checkValue);
-      document.querySelector(DOM.answerButton).addEventListener('click', displayQuestion);
-      document.addEventListener('keypress', function(event){ 
-        if (event.keyCode === 13 || event.which === 13){
-          displayQuestion();
-        };
-      });
+    //Set Events Listener
+      UICtrl.setupQuestionEventListener(checkValue, displayQuestion);
   };
   var displayQuestion = function()  {
     var element, html, questions, questNumber;
 
     if (document.getElementById(DOM.answer1).checked || document.getElementById(DOM.answer2).checked || document.getElementById(DOM.answer3).checked){
       
-      //1. Delete last question
+      //Delete last question
       element = document.querySelector(DOM.displaySection);
       element.parentNode.removeChild(element);
-      // 2. Select random number
+      //Select random number
       questions = UICtrl.getQuestions();
       questNumber = count.number(questions);
-      //3. Add Question, aswers and send button
+      //Add Question, aswers and send button
       html = UICtrl.htmlBuilding(questNumber);
       // Insert the HTML into the DOM
       document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
+      //Set Events Listener
+      UICtrl.setupQuestionEventListener(checkValue, displayQuestion);
     }else {
       window.alert('Zaznacz odpowiedź, żeby przejść dalej.');
     }
