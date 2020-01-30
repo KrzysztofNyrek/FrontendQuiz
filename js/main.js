@@ -115,7 +115,7 @@ var UIController = (function(){
     correctAnswer: 2,
   },
   question13: {
-    questionValue: '<script> możemy wpiąc w HTML:', 
+    questionValue: '&lang;script&rang; możemy wpiąc w HTML:', 
     answer1: 'tylko w sekcji HEAD', 
     answer2: 'tylko na końcu sekcji BODY',
     answer3: 'w obu miejscach',
@@ -182,7 +182,7 @@ var UIController = (function(){
       newHtml = newHtml.replace('%answer1%', quest.answer1);
       newHtml = newHtml.replace('%answer2%', quest.answer2);
       newHtml = newHtml.replace('%answer3%', quest.answer3);
-      
+  
       return newHtml;
     },
     setupQuestionEventListener: function(checkValue, displayQuestion){
