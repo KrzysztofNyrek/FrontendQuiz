@@ -168,6 +168,19 @@ var UIController = (function(){
     },
     getQuestions: function(){
       return questions;
+    }, 
+    htmlBuilding: function(questNumber){
+      var questNmb, quest, html, newHtml;
+      questNmb = 'question' + questNumber.questionNumber;
+      quest = questions[questNmb];
+      // Create HTML string with placeholder text
+      html = '<section class="display-area--js"><h2 class="question question--js">%qestion%</h2><div class="answer"><p class="answer__title">Zaznacz prawidłową odpowiedź:</p><section class="answer__avalible answer__avalible--js"><div class="margin-bottom"><input type="checkbox" id="choice1">%answer1%</div><div class="margin-bottom answer__avalible--gold"><input type="checkbox" id="choice2">%answer2%</div><div class="margin-bottom"><input type="checkbox" id="choice3">%answer3%</div><button class="button button--js">Send Answer</button></section></div></section>';
+      newHtml = html.replace('%qestion%', quest.questionValue);
+      newHtml = newHtml.replace('%answer1%', quest.answer1);
+      newHtml = newHtml.replace('%answer2%', quest.answer2);
+      newHtml = newHtml.replace('%answer3%', quest.answer3);
+      
+      return newHtml;
     }
   }
 })();
@@ -238,9 +251,9 @@ var controller = (function(UICtrl, count){
       // 2. Select random number
       questions = UICtrl.getQuestions();
       questNumber = count.number(questions);
-
+      //console.log(questNumber.questionNumber);
       //3. Add Question, aswers and send button
-      html = '<section class="display-area--js"><h2 class="question question--js">Pytanie 1</h2><div class="answer"><p class="answer__title">Zaznacz prawidłową odpowiedź:</p></div></section>';
+      html = UICtrl.htmlBuilding(questNumber);
       // Insert the HTML into the DOM
       document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
     }else {
