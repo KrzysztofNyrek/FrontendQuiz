@@ -23,140 +23,140 @@ var UIController = (function(){
   };
   //Question storage section
   var questions ={
-  question1: {
+  question0: {
     questionValue: 'Czy JS jest super?',
     answer1: 'Tak',
     answer2: 'Nie',
     answer3: 'Nie wiem',
     correctAnswer: 1,
   },
-  question2: {
+  question1: {
     questionValue: 'Jak wyśrodkować div na stronie?',
     answer1: 'margin: 0 auto',
     answer2: 'text-adjusting: center',
     answer3: 'iv: center',
     correctAnswer: 1,
   },
-  question3: {
+  question2: {
     questionValue: 'Jaką wartość box-sizing trzeba ustawić w CSS, żeby padding nie powiększył wymiarów box\'a',
     answer1: 'content-box',
     answer2: 'border-box',
     answer3: 'inherit',
     correctAnswer: 2,
   },
-  question4: {
+  question3: {
     questionValue: 'Jaki znacznik HTML pozwala bez użycia CSS dopasować rozmiar obrazu do wymiaru ekranu?',
     answer1: 'img',
     answer2: 'iframe',
     answer3: 'source srcset',
     correctAnswer: 3,
   },
-  question5: {
+  question4: {
     questionValue: 'Czy jednostka REM odnosi się do wartości czcionki:',
     answer1: 'rodzica',
     answer2: 'root\'a',
     answer3: 'domyślnej wielkości czcionki w systemie',
     correctAnswer: 2,
   },
-  question6: {
+  question5: {
     questionValue: 'Czy w Java Script można podać jako parametr funkcji inną funkcję?',
     answer1: 'Tak',
     answer2: 'Nie',
     answer3: 'Nie wiem',
     correctAnswer: 1,
   },
-  question7: {
+  question6: {
     questionValue: 'Czy zmienna let zadeklarowana w ciele funkcji będzie dostępna poza tą funkcją?',
     answer1: 'Tak',
     answer2: 'Nie',
     answer3: 'Nie wiem',
     correctAnswer: 2,
   },
-  question8: {
+  question7: {
     questionValue: 'W celu porównania danych wraz z ich typem należy użyć znaku:',
     answer1: '==',
     answer2: '$==',
     answer3: '===',
     correctAnswer: 3,
   },
-  question9: {
+  question8: {
     questionValue: 'Promise w Java Script pozwala na:', 
     answer1: 'deklarowanie zmiennych w dowolnym miejscu w kodzie',
     answer2: 'przesyłanie danych z formularza na serwer',
     answer3: 'sterowanie przepływem kodu asynchronicznego',
     correctAnswer: 3,
   },
-  question10: {
+  question9: {
     questionValue: 'Właściwość will-change w CSS pozwala na:', 
     answer1: 'zmodyfikowanie elementu na stronie przez użytkownika',
     answer2: 'informuje przeglądarkę, że dany element będzie się zmieniał',
     answer3: 'zmodyfikowanie danego elementu CSS przez JavaScript',
     correctAnswer: 2,
   },
-  question11: {
+  question10: {
     questionValue: 'Co to znaczy, że kod jest asynchroniczny?', 
     answer1: 'przeglądarka może wykonywać część kodu w tle', 
     answer2: 'część kodu napisana jest w Java Script, a część w React',
     answer3: 'kod wykona się w odwrotnej kolejności',
     correctAnswer: 1,
   },
-  question12: {
+  question11: {
     questionValue: 'Ternary operator to:', 
     answer1: 'operator nadpisujący wartość poprzednią', 
     answer2: 'uproszczony zapis wyrażenia warunkowego if',
     answer3: 'operator terminowo wyłączający wskazany blok kodu',
     correctAnswer: 2,
   },
-  question13: {
+  question12: {
     questionValue: 'Czy dane zawarte w local Storage zostaną usunięte, kiedy użytkownik wyczyści ciasteczka z przeglądarki?', 
     answer1: 'Tak', 
     answer2: 'Nie',
     answer3: 'Nie wiem',
     correctAnswer: 2,
   },
-  question14: {
+  question13: {
     questionValue: '<script> możemy wpiąc w HTML:', 
     answer1: 'tylko w sekcji HEAD', 
     answer2: 'tylko na końcu sekcji BODY',
     answer3: 'w obu miejscach',
     correctAnswer: 3,
   },
-  question15: {
+  question14: {
     questionValue: '\'git checkout\' służy do:', 
     answer1: 'sprawdzenia stanu repozytorium', 
     answer2: 'sprawdzenia połączenia z serwerem',
     answer3: 'zmiany gałęzi kodu',
     correctAnswer: 3,
   },
-  question16: {
+  question15: {
     questionValue: 'Do czego służy CSS Sprites?', 
     answer1: 'do łączenia wielu plików css w jeden plik', 
     answer2: 'do łączenia wielu plików graficznych w jeden plik',
     answer3: 'do łączenia wielu plików JS w jeden plik',
     correctAnswer: 2,
   },
-  question17: {
+  question16: {
     questionValue: '\'Git log --oneline <TAG>\' wykona następującą akcję:',
     answer1: 'doda TAG do ostatniego commita będącego na serwerze', 
     answer2: 'wyświetli log commita oznaczonego wskazanym tagiem',
     answer3: 'wyświetli historię od commita zaznaczonego wskazanym tagiem',
     correctAnswer: 3,
   },
-  question18: {
+  question17: {
     questionValue: 'Polecenie \'gitk\' wywoła:',
     answer1: 'narzędzie do przeglądania historii projektu',
     answer2: 'consolę git\'a',
     answer3: 'narzędzie do komunikacji z serwerem',
     correctAnswer: 1,
   },
-  question19: {
+  question18: {
     questionValue: 'Flex-basis pozwala określić:',
     answer1: 'maksymalny rozmiar elementu',
     answer2: 'położenie obiektu w kontenerze',
     answer3: 'domyślne ułożenie elementu względem innych elementów',
     correctAnswer: 1,
   },
-  question20: {
+  question19: {
     questionValue: 'Typ input radiobutton pozwala na:',
     answer1: 'wybranie dwóch elementów z listy',
     answer2: 'wybranie losowego elementu z listy',
