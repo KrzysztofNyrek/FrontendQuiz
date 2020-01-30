@@ -17,6 +17,9 @@ var UIController = (function(){
     finalButton: '.final-result__button--js',
     finalyComment: '.final-result__summary--js',
     displaySection: '.display-area--js',
+    answer1: 'choice1',
+    answer2: 'choice2',
+    answer3: 'choice3'
   };
   //Question storage section
   var questions ={
@@ -211,47 +214,51 @@ var controller = (function(UICtrl, count){
 
   //JS pointer definition
   var DOM = UICtrl.getDOMstrings();
-  var answer1 = document.getElementById('choice1');
-  var answer2 = document.getElementById('choice2');
-  var answer3 = document.getElementById('choice3');
-
+  
   var setupEventListeners = function(){
-
-    /* comment out because changed html structure for a moment !RESTORE THIS PART IN PRODUCTION
-    document.querySelector(DOM.startButton).addEventListener('click', displayQuestion);
+    
+    document.querySelector(DOM.startButton).addEventListener('click', displayFirstQuestion);
     document.addEventListener('keypress', function(event){ 
       if (event.keyCode === 13 || event.which === 13){
-        displayQuestion();
+        displayFirstQuestion()
       }
     });
-    */
-    answer1.addEventListener('click', checkValue);
-    answer2.addEventListener('click', checkValue);
-    answer3.addEventListener('click', checkValue);
-    document.querySelector(DOM.answerButton).addEventListener('click', displayQuestion);
   };
-  //Allow user checked only one answer
-  var checkValue = function (event) {
-    for (var i = 1;i <= 3; i++)
-      {
-        let element = 'choice' + i;
-        document.getElementById(element).checked = false;
-      }
-    document.getElementById(event.target.id).checked = true;
+  var displayFirstQuestion = function()  {
+    var element, html, questions, questNumber;
+    
+    // Delete first page img and button
+      element = document.querySelector(DOM.displaySection);
+      element.parentNode.removeChild(element);
+    // Select random number
+      questions = UICtrl.getQuestions();
+      questNumber = count.number(questions);
+    // Add Question, aswers and send button
+      html = UICtrl.htmlBuilding(questNumber);
+    // Insert the HTML into the DOM
+      document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
+    // Set Event Listeners
+      document.getElementById(DOM.answer1).addEventListener('click', checkValue);
+      document.getElementById(DOM.answer2).addEventListener('click', checkValue);
+      document.getElementById(DOM.answer3).addEventListener('click', checkValue);
+      document.querySelector(DOM.answerButton).addEventListener('click', displayQuestion);
+      document.addEventListener('keypress', function(event){ 
+        if (event.keyCode === 13 || event.which === 13){
+          displayQuestion();
+        };
+      });
   };
-
   var displayQuestion = function()  {
     var element, html, questions, questNumber;
 
-    if (answer1.checked || answer2.checked || answer3.checked){
+    if (document.getElementById(DOM.answer1).checked || document.getElementById(DOM.answer2).checked || document.getElementById(DOM.answer3).checked){
       
-      //1. Delete first page img and button
+      //1. Delete last question
       element = document.querySelector(DOM.displaySection);
       element.parentNode.removeChild(element);
       // 2. Select random number
       questions = UICtrl.getQuestions();
       questNumber = count.number(questions);
-      //console.log(questNumber.questionNumber);
       //3. Add Question, aswers and send button
       html = UICtrl.htmlBuilding(questNumber);
       // Insert the HTML into the DOM
@@ -261,13 +268,21 @@ var controller = (function(UICtrl, count){
     }
     
   };
+  //Allow user checked only one answer
+  var checkValue = function (event) {
+      for (var i = 1;i <= 3; i++)
+        {
+          let element = 'choice' + i;
+          document.getElementById(element).checked = false;
+        }
+      document.getElementById(event.target.id).checked = true;
+  };
   //function allow us to start aplication
   return {
     init: function(){
       setupEventListeners();
     },
   }
-
 })(UIController, countController);
 
 
