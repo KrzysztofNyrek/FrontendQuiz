@@ -253,23 +253,31 @@ var controller = (function(UICtrl, count){
     });
   };
   var displayFirstQuestion = function()  {
-    var element, html, questions, questNumber;
+    var element, html, questions, questNumber, questNumbersArray, questionsLenght;
     
+    //Set sesion counter value
+      sessionStorage.setItem('numberOfQuestions', 1);
+      sessionStorage.setItem('score', 0);
+      //Set posible question number array
+      questions = UICtrl.getQuestions();
+      questionsLenght = Object.keys(questions).length - 1;
+      questNumbersArray =Array.from({length: questionsLenght});
+      for (let i = 0; i <= questionsLenght; i++){
+        questNumbersArray[i] = i;
+      }
+      sessionStorage.setItem('AwalibleQuestions', questNumbersArray.toString());
+
     // Delete first page img and button
       element = document.querySelector(DOM.displaySection);
       element.parentNode.removeChild(element);
     // Select random number
-      questions = UICtrl.getQuestions();
-      questNumber = count.number(questions); //In this place we rather should pass array with questions number
+      questNumber = count.number(questions);
     // Add Question, aswers and send button
       html = UICtrl.htmlBuilding(questNumber);
     // Insert the HTML into the DOM
       document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
     //Set Events Listener
       UICtrl.setupQuestionEventListener(checkValue, displayQuestion);
-    //Set sesion counter value
-    sessionStorage.setItem('numberOfQuestions', 1);
-    sessionStorage.setItem('score', 0);
   };
   var displayQuestion = function()  {
     var element, html, questions, questNumber, answer, point, score, numberOfQuestions;
@@ -302,7 +310,7 @@ var controller = (function(UICtrl, count){
       element.parentNode.removeChild(element);
       // Count displayed question
       numberOfQuestions = JSON.parse(sessionStorage.getItem('numberOfQuestions'));
-      numberOfQuestions += 1;
+      numberOfQuestions ++;
       sessionStorage.setItem('numberOfQuestions', numberOfQuestions);
       //Checked if game is over
       if (numberOfQuestions >= 10){
