@@ -215,7 +215,10 @@ var countController = (function(){
       return{
         questionNumber
       };
-    }
+    },
+    checkAnswer: function(answerValue){
+      console.log(answerValue);
+    },
   }
 })();
 
@@ -252,11 +255,24 @@ var controller = (function(UICtrl, count){
       UICtrl.setupQuestionEventListener(checkValue, displayQuestion);
   };
   var displayQuestion = function()  {
-    var element, html, questions, questNumber;
+    var element, html, questions, questNumber, answer;
 
     if (document.getElementById(DOM.answer1).checked || document.getElementById(DOM.answer2).checked || document.getElementById(DOM.answer3).checked){
       
-      //Delete last question
+      //Check if answer is correct and add point if so
+      if (document.getElementById(DOM.answer1).checked){
+        answer = 1;
+      }else if (document.getElementById(DOM.answer2).checked){
+        answer = 2;
+      }else if (document.getElementById(DOM.answer3).checked){
+        answer = 3;
+      }else {
+        window.alert('Coś poszło nie tak, odśwież stronę :/');
+      }
+      count.checkAnswer(answer);
+      //Deleted used question from questions storage
+
+      //Delete last question from page
       element = document.querySelector(DOM.displaySection);
       element.parentNode.removeChild(element);
       //Select random number
