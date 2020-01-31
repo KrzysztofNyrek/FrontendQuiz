@@ -210,7 +210,7 @@ var countController = (function(){
       var questionsLenght, questions, questionNumber;
 
       questions = questionsStorage;
-      questionsLenght = Object.keys(questions).length;
+      questionsLenght = Object.keys(questions).length - 1;
       questionNumber = Math.round(Math.random() * questionsLenght);
       sessionStorage.setItem('question', questionNumber);
       return{
