@@ -212,12 +212,26 @@ var countController = (function(){
       questions = questionsStorage;
       questionsLenght = Object.keys(questions).length;
       questionNumber = Math.round(Math.random() * questionsLenght);
+      sessionStorage.setItem('question', questionNumber);
       return{
         questionNumber
       };
     },
-    checkAnswer: function(answerValue){
-      console.log(answerValue);
+    checkAnswer: function(answerValue, questions){
+      var questionNumber, correctAnswerValue, questNmb, point;
+      
+      //Get last question number from local storage
+      questionNumber = JSON.parse(sessionStorage.getItem('question'));
+      questNmb = 'question' + questionNumber;
+      correctAnswerValue = questions[questNmb].correctAnswer;
+      if (answerValue === correctAnswerValue){
+        point = 1;
+      }else{
+        point = 0;
+      }
+      return {
+        point
+      }
     },
   }
 })();
@@ -255,10 +269,12 @@ var controller = (function(UICtrl, count){
       UICtrl.setupQuestionEventListener(checkValue, displayQuestion);
   };
   var displayQuestion = function()  {
-    var element, html, questions, questNumber, answer;
+    var element, html, questions, questNumber, answer, point, score;
 
     if (document.getElementById(DOM.answer1).checked || document.getElementById(DOM.answer2).checked || document.getElementById(DOM.answer3).checked){
       
+      // Get question variable
+      questions = UICtrl.getQuestions();
       //Check if answer is correct and add point if so
       if (document.getElementById(DOM.answer1).checked){
         answer = 1;
@@ -269,14 +285,19 @@ var controller = (function(UICtrl, count){
       }else {
         window.alert('Coś poszło nie tak, odśwież stronę :/');
       }
-      count.checkAnswer(answer);
+      point = count.checkAnswer(answer, questions);
+      point = point.point;
+      
+      //Total Score history
+      score = JSON.parse(sessionStorage.getItem('score'));
+      score += point;
+      sessionStorage.setItem('score', score);
       //Deleted used question from questions storage
 
       //Delete last question from page
       element = document.querySelector(DOM.displaySection);
       element.parentNode.removeChild(element);
       //Select random number
-      questions = UICtrl.getQuestions();
       questNumber = count.number(questions);
       //Add Question, aswers and send button
       html = UICtrl.htmlBuilding(questNumber);
