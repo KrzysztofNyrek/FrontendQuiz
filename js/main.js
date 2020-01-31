@@ -205,14 +205,26 @@ var countController = (function(){
   
   return{
 
-    number: function(questionsStorage){
+    number: function(){
 
-      var questionsLenght, questions, questionNumber;
+      var questionsLenght, questions, questionNumber, randomNumber;
+      
+      //Load avalibe question from SessionStorage
+      questions = sessionStorage.getItem('AwalibleQuestions');
+      questions = questions.split(",");
+      questionsLenght = questions.length - 1;
+      
+      //Calculate random number
+      randomNumber = Math.round(Math.random() * questionsLenght);
+      questionNumber = questions[randomNumber];
 
-      questions = questionsStorage;
-      questionsLenght = Object.keys(questions).length - 1;
-      questionNumber = Math.round(Math.random() * questionsLenght);
+      //Save question number
       sessionStorage.setItem('question', questionNumber);
+
+      //Deleted used question from questions storage
+      questions.splice(randomNumber, 1);
+      
+      sessionStorage.setItem('AwalibleQuestions', questions.toString());
       return{
         questionNumber
       };
@@ -271,7 +283,7 @@ var controller = (function(UICtrl, count){
       element = document.querySelector(DOM.displaySection);
       element.parentNode.removeChild(element);
     // Select random number
-      questNumber = count.number(questions);
+      questNumber = count.number();
     // Add Question, aswers and send button
       html = UICtrl.htmlBuilding(questNumber);
     // Insert the HTML into the DOM
@@ -303,7 +315,6 @@ var controller = (function(UICtrl, count){
       score = JSON.parse(sessionStorage.getItem('score'));
       score += point;
       sessionStorage.setItem('score', score);
-      //Deleted used question from questions storage
 
       //Delete last question from page
       element = document.querySelector(DOM.displaySection);
