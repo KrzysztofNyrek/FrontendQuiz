@@ -71,13 +71,9 @@
 }
 
 .final-result{
-  position: absolute;
-  top: calc(5%);
-  left: calc(5%);
   background-color: #E6EED6;
-  height: 90%;
-  width: 90%;
   border-radius: 5%;
+  padding: 1rem 0;
   &__header{
     font-size: 3rem;
     margin: 1rem;
