@@ -190,11 +190,6 @@ var UIController = (function(){
       document.getElementById(DOMstrings.answer2).addEventListener('click', checkValue);
       document.getElementById(DOMstrings.answer3).addEventListener('click', checkValue);
       document.querySelector(DOMstrings.answerButton).addEventListener('click', displayQuestion);
-      document.addEventListener('keypress', function(event){ 
-        if (event.keyCode === 13 || event.which === 13){
-          displayQuestion();
-        };
-      });
     },
     finalResultDisplayBuilding: function(scoreValue){
       var finalScore, html, finalHtml;
@@ -278,11 +273,6 @@ var controller = (function(UICtrl, count){
   var setupEventListeners = function(){
     
     document.querySelector(DOM.startButton).addEventListener('click', displayFirstQuestion);
-    document.addEventListener('keypress', function(event){ 
-      if (event.keyCode === 13 || event.which === 13){
-        displayFirstQuestion()
-      }
-    });
   };
   var displayFirstQuestion = function()  {
     var element, html, questions, questNumber, questNumbersArray, questionsLenght;
@@ -344,12 +334,16 @@ var controller = (function(UICtrl, count){
       numberOfQuestions ++;
       sessionStorage.setItem('numberOfQuestions', numberOfQuestions);
       //Checked if game is over
+      var refreshingPage = function(){
+        window.location.reload(false);
+      };
+
       if (numberOfQuestions >= 10){
         html = UICtrl.finalResultDisplayBuilding(score);
         // Insert the HTML into the DOM
         document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
         //Set Events Listener
-        
+        document.querySelector(DOM.finalButton).addEventListener('click', refreshingPage);
       }else{
         //Select random number
         questNumber = count.number(questions);
@@ -385,266 +379,3 @@ var controller = (function(UICtrl, count){
 
 //This line of code start aplication after page load
 controller.init();
-
-/*
-
-
-//Used session storage to avoid losing data when browser refreshing page
-let totalScore = JSON.parse(sessionStorage.getItem("SessionTotalScore"));
-let temporaryAnswer = JSON.parse(sessionStorage.getItem("TemporaryAnswer")); //keep value true/false to load AnswerBox or wrongAnswerBox
-let totalQuestionNumber = JSON.parse(sessionStorage.getItem("SessionTotalQuestion"));
-
-// Set Session Total Score variable in session storage
-if(totalScore === null){
-  sessionStorage.setItem("SessionTotalScore", 0);
-}
-//Check if it's first round or another round and display popup box 
-if(totalQuestionNumber === null){
-  sessionStorage.setItem("SessionTotalQuestion", 0);
-
-}else if(totalQuestionNumber >0 && totalQuestionNumber <10){
-  AnswerBox.classList.remove('answer-box--visible');
-  
-    if(temporaryAnswer === 1){
-      answerBoxText.textContent = "Świetna odpowiedź";
-    }else{
-      answerBoxText.textContent = "Następnym razem pójdzie Ci lepiej ;)"
-    }
-  partScoreDisplay.textContent = totalScore;
-  moveOnButton.addEventListener('click', (e) =>{
-    AnswerBox.classList.add('answer-box--visible');
-  });
-//Display final result box
-}else if(totalQuestionNumber === 10){
-  finalResultBox.classList.remove('final-result--visible');
-
-  if(totalScore < 5){
-    finalyComment.textContent ="Jeśli poćwiczysz jeszcze trochę, na pewno będziesz znał odpowiedź na większość pytań";
-  }else if (totalScore >= 5 && totalScore < 8){
-    finalyComment.textContent = "Już prawie wiesz wszystko :)";
-  }else{
-    finalyComment.textContent = "Jesteś super FrontEnd HERO";
-  }
-  finalScoreDisplay.textContent = totalScore;
-  //Refresh page to delete all session storage
-  finalButton.addEventListener('click', (e) =>{
-    finalResultBox.classList.add('final-result--visible');
-    sessionStorage.setItem("SessionTotalQuestion", 0);
-    sessionStorage.setItem("SessionTotalScore", 0);
-    sessionStorage.setItem("QuestionHistory", '');
-    totalQuestionNumber =0;
-  });
-}else if (totalQuestionNumber >10){
-  sessionStorage.setItem("QuestionHistory", '');
-  sessionStorage.setItem("SessionTotalQuestion", 0);
-  sessionStorage.setItem("SessionTotalScore", 0);
-  totalQuestionNumber =0;
-}
-
-
-//Variables definitions
-let question = document.querySelector(".question--js");
-let ans1 = document.querySelector(".answer__choice1--js");
-let ans2 = document.querySelector(".answer__choice2--js");
-let ans3 = document.querySelector(".answer__choice3--js");
-let correctAnswerNumber;
-let randomNumber;
-let questionStorage;
-let questionStorageLength;
-let questionStorageNbr = [];
-let testValue;
-let questionStr;
-let questionNumber;
-let questionHistory = sessionStorage.getItem("QuestionHistory");
-
-//Question pick mechanism
-if(questionHistory === null){
-  randomNumber = Math.round(Math.random() * 19);
-  sessionStorage.setItem("QuestionHistory", randomNumber);
-  
-}else{
-  questionStorage = questionHistory.split(",");
-  let i = 0;
-  questionStorageLength = questionStorage.length;
-
-    for (i=0; i < questionStorageLength; i++){
-      questionStr = questionStorage[i];
-      questionNumber = Number(questionStr);
-      questionStorageNbr.push(questionNumber);
-    }
-  //Check if question appeared in current quiz earlier and if so change the question number
-  do{
-    randomNumber = Math.round(Math.random() * 19);
-    testValue = 0;
-    for (i=0; i<questionStorageNbr.length; i++){
-      if(randomNumber === questionStorageNbr[i]){
-        testValue = -1;
-      }
-    }
-    i += 1;
-  } while (testValue < 0 && i < 10);
-  questionStorageNbr.push(randomNumber);
-  sessionStorage.setItem("QuestionHistory", questionStorageNbr);
-}
-//Push question value to the browser
-switch (randomNumber){
-  case 0:
-    question.textContent = question1.questionValue;
-    ans1.textContent = question1.answer1;
-    ans2.textContent = question1.answer2;
-    ans3.textContent = question1.answer3;
-    correctAnswerNumber = question1.correctAnswer;
-    break;
-  case 1:
-    question.textContent = question2.questionValue;
-    ans1.textContent = question2.answer1;
-    ans2.textContent = question2.answer2;
-    ans3.textContent = question2.answer3;
-    correctAnswerNumber = question2.correctAnswer;
-  break;
-  case 2:
-    question.textContent = question3.questionValue;
-    ans1.textContent = question3.answer1;
-    ans2.textContent = question3.answer2;
-    ans3.textContent = question3.answer3;
-    correctAnswerNumber = question3.correctAnswer;
-  break;
-  case 3:
-    question.textContent = question4.questionValue;
-    ans1.textContent = question4.answer1;
-    ans2.textContent = question4.answer2;
-    ans3.textContent = question4.answer3;
-    correctAnswerNumber = question4.correctAnswer;
-  break;
-  case 4:
-    question.textContent = question5.questionValue;
-    ans1.textContent = question5.answer1;
-    ans2.textContent = question5.answer2;
-    ans3.textContent = question5.answer3;
-    correctAnswerNumber = question5.correctAnswer;
-  break;
-  case 5:
-    question.textContent = question6.questionValue;
-    ans1.textContent = question6.answer1;
-    ans2.textContent = question6.answer2;
-    ans3.textContent = question6.answer3;
-    correctAnswerNumber = question6.correctAnswer;
-  break;
-  case 6:
-    question.textContent = question7.questionValue;
-    ans1.textContent = question7.answer1;
-    ans2.textContent = question7.answer2;
-    ans3.textContent = question7.answer3;
-    correctAnswerNumber = question7.correctAnswer;
-  break;
-  case 7:
-    question.textContent = question8.questionValue;
-    ans1.textContent = question8.answer1;
-    ans2.textContent = question8.answer2;
-    ans3.textContent = question8.answer3;
-    correctAnswerNumber = question8.correctAnswer;
-  break;
-  case 8:
-    question.textContent = question9.questionValue;
-    ans1.textContent = question9.answer1;
-    ans2.textContent = question9.answer2;
-    ans3.textContent = question9.answer3;
-    correctAnswerNumber = question9.correctAnswer;
-  break;
-  case 9:
-    question.textContent = question10.questionValue;
-    ans1.textContent = question10.answer1;
-    ans2.textContent = question10.answer2;
-    ans3.textContent = question10.answer3;
-    correctAnswerNumber = question10.correctAnswer;
-  break;
-  case 10:
-    question.textContent = question11.questionValue;
-    ans1.textContent = question11.answer1;
-    ans2.textContent = question11.answer2;
-    ans3.textContent = question11.answer3;
-    correctAnswerNumber = question11.correctAnswer;
-  break;
-  case 11:
-    question.textContent = question12.questionValue;
-    ans1.textContent = question12.answer1;
-    ans2.textContent = question12.answer2;
-    ans3.textContent = question12.answer3;
-    correctAnswerNumber = question12.correctAnswer;
-  break;
-  case 12:
-    question.textContent = question13.questionValue;
-    ans1.textContent = question13.answer1;
-    ans2.textContent = question13.answer2;
-    ans3.textContent = question13.answer3;
-    correctAnswerNumber = question13.correctAnswer;
-  break;
-  case 13:
-    question.textContent = question14.questionValue;
-    ans1.textContent = question14.answer1;
-    ans2.textContent = question14.answer2;
-    ans3.textContent = question14.answer3;
-    correctAnswerNumber = question14.correctAnswer;
-  break;
-  case 14:
-    question.textContent = question15.questionValue;
-    ans1.textContent = question15.answer1;
-    ans2.textContent = question15.answer2;
-    ans3.textContent = question15.answer3;
-    correctAnswerNumber = question15.correctAnswer;
-  break;
-  case 15:
-    question.textContent = question16.questionValue;
-    ans1.textContent = question16.answer1;
-    ans2.textContent = question16.answer2;
-    ans3.textContent = question16.answer3;
-    correctAnswerNumber = question16.correctAnswer;
-  break;
-  case 16:
-    question.textContent = question17.questionValue;
-    ans1.textContent = question17.answer1;
-    ans2.textContent = question17.answer2;
-    ans3.textContent = question17.answer3;
-    correctAnswerNumber = question17.correctAnswer;
-  break;
-  case 17:
-    question.textContent = question18.questionValue;
-    ans1.textContent = question18.answer1;
-    ans2.textContent = question18.answer2;
-    ans3.textContent = question18.answer3;
-    correctAnswerNumber = question18.correctAnswer;
-  break;
-  case 18:
-    question.textContent = question19.questionValue;
-    ans1.textContent = question19.answer1;
-    ans2.textContent = question19.answer2;
-    ans3.textContent = question19.answer3;
-    correctAnswerNumber = question19.correctAnswer;
-  break;
-  case 19:
-    question.textContent = question20.questionValue;
-    ans1.textContent = question20.answer1;
-    ans2.textContent = question20.answer2;
-    ans3.textContent = question20.answer3;
-    correctAnswerNumber = question20.correctAnswer;
-  break;
-};
-
-//Send answer and count points
-answerButton.addEventListener('click', (e) =>{
-  
-  //Increas and storage number of question
-  totalQuestionNumber += 1;
-  sessionStorage.setItem('SessionTotalQuestion', totalQuestionNumber);
-
-  //Checked if answer is good and added point if so
-  let answerValue = document.querySelector('input[name="answerX"]:checked').value;
-  if (answerValue == correctAnswerNumber){
-    totalScore += 1;
-    sessionStorage.setItem('SessionTotalScore', totalScore);
-    sessionStorage.setItem('TemporaryAnswer', 1);
-  }else{
-    sessionStorage.setItem('TemporaryAnswer', 0);
-  }
-});
-*/
