@@ -195,6 +195,26 @@ var UIController = (function(){
           displayQuestion();
         };
       });
+    },
+    finalResultDisplayBuilding: function(scoreValue){
+      var finalScore, html, finalHtml;
+      finalScore = scoreValue;
+
+      if(finalScore < 5){
+        html = '<section class="final-result final-result--js"><h2 class="final-result__header">Gratulacje</h2><p class="final-result__text">Zakończyłeś test</p><p class="final-result__text margin-bottom">Twój wynik wynosi:</p><p class="final-result__score final-result__score--js">%value%</p>        <p class="final-result__summary final-result__summary--js">Jeśli poćwiczysz jeszcze trochę, na pewno będziesz znał odpowiedź na większość pytań</p><button class="final-result__button final-result__button--js">Gram ponownie</button></section>';
+
+        finalHtml = html.replace('%value%', finalScore);
+
+      }else if (finalScore >= 5 && finalScore < 8){
+        html = '<section class="final-result final-result--js"><h2 class="final-result__header">Gratulacje</h2><p class="final-result__text">Zakończyłeś test</p><p class="final-result__text margin-bottom">Twój wynik wynosi:</p><p class="final-result__score final-result__score--js">%value%</p>        <p class="final-result__summary final-result__summary--js">Już prawie wiesz wszystko :)</p><button class="final-result__button final-result__button--js">Gram ponownie</button></section>';
+
+        finalHtml = html.replace('%value%', finalScore);
+      }else{
+        html = '<section class="final-result final-result--js"><h2 class="final-result__header">Gratulacje</h2><p class="final-result__text">Zakończyłeś test</p><p class="final-result__text margin-bottom">Twój wynik wynosi:</p><p class="final-result__score final-result__score--js">%value%</p>        <p class="final-result__summary final-result__summary--js">Jesteś super FrontEnd HERO</p><button class="final-result__button final-result__button--js">Gram ponownie</button></section>';
+
+        finalHtml = html.replace('%value%', finalScore);
+      };
+      return finalHtml;
     }
   }
 })();
@@ -325,7 +345,11 @@ var controller = (function(UICtrl, count){
       sessionStorage.setItem('numberOfQuestions', numberOfQuestions);
       //Checked if game is over
       if (numberOfQuestions >= 10){
-        window.alert('Game Over');
+        html = UICtrl.finalResultDisplayBuilding(score);
+        // Insert the HTML into the DOM
+        document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
+        //Set Events Listener
+        
       }else{
         //Select random number
         questNumber = count.number(questions);
