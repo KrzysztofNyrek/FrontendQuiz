@@ -1,0 +1,16 @@
+@mixin buttonAnimation {
+  box-shadow: 0px 2px 2px 0px rgba(34, 33, 34, 0.603);
+  transition: all .2s;
+  &:active{
+    transform: scale(0.8);
+    box-shadow: 0px;
+  }
+}
+@mixin buttonProperties {
+  border-radius: 20px;
+  font-family: 'Anton', sans-serif;
+  color: #E6EED6;
+  background-color: #412234;
+  margin: 1rem auto;
+  display: block;
+}
