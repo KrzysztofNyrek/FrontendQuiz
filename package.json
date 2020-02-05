@@ -4,7 +4,7 @@
   "description": "This is short quiz for frontend developer",
   "main": "index.js",
   "scripts": {
-    "eslint": "eslint .",
+    "eslint": "eslint . --fix",
     "watch:sass": "node-sass sass/main.scss css/style.css -w",
     "devserver": "browser-sync start --server --files index.html css/*.css js/*.js --host 192.168.1.105",
     "start": "npm-run-all --parallel devserver watch:sass",
