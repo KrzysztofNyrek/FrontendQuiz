@@ -208,11 +208,11 @@ var UIController = (function(){
         html = '<section class="final-result final-result--js"><h2 class="final-result__header">Gratulacje</h2><p class="final-result__text">Zakończyłeś test</p><p class="final-result__text margin-bottom">Twój wynik wynosi:</p><p class="final-result__score final-result__score--js">%value%</p>        <p class="final-result__summary final-result__summary--js">Jesteś super FrontEnd HERO</p><button class="final-result__button final-result__button--js">Gram ponownie</button></section>';
 
         finalHtml = html.replace('%value%', finalScore);
-      };
+      }
       return finalHtml;
     }
   }
-})();
+}());
 
 // COUNT CONTROLLER
 var countController = (function(){
@@ -261,7 +261,7 @@ var countController = (function(){
       }
     },
   }
-})();
+}());
 
 // GLOBAL APP CONTROLLER
 var controller = (function(UICtrl, count){
@@ -353,7 +353,7 @@ var controller = (function(UICtrl, count){
         document.querySelector(DOM.pagewrapper).insertAdjacentHTML('beforeend', html);
         //Set Events Listener
         UICtrl.setupQuestionEventListener(checkValue, displayQuestion);
-      };  
+      }  
     }else {
       window.alert('Zaznacz odpowiedź, żeby przejść dalej.');
     }
@@ -374,7 +374,7 @@ var controller = (function(UICtrl, count){
       setupEventListeners();
     },
   }
-})(UIController, countController);
+}(UIController, countController));
 
 
 //This line of code start aplication after page load
